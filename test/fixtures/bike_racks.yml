@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  street_number: MyString
+  street_name: MyString
+  street_side: MyString
+  sky_train_station_name: MyString
+  bia: MyString
+  number_of_racks: 
+  install_year: 
+
+two:
+  street_number: MyString
+  street_name: MyString
+  street_side: MyString
+  sky_train_station_name: MyString
+  bia: MyString
+  number_of_racks: 
+  install_year: 
