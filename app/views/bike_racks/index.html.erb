@@ -1,19 +1,26 @@
-<h1>Listing Bike Racks</h1>
-<%= link_to 'Update', full_update_path %>
-<table class="table table-bordered table-striped">
-  <tr>
-    <th>st number</th>
-    <th>st name</th>
-    <th>st side</th>
-    <th>number of racks</th>
-  </tr>
- 
-  <% @bike_racks.each do |bike_rack| %>
-    <tr>
-      <td><%= bike_rack.street_number %></td>
-      <td><%= bike_rack.street_name %></td>
-      <td><%= bike_rack.street_side %></td>
-      <td><%= bike_rack.number_of_racks %></td>
-    </tr>
-  <% end %>
-</table>
+<body>
+  <%= render 'forms/navbar' %>
+  <div class="container">
+    <%= yield %>
+    <div>
+      <%= link_to 'Update', full_update_path, class: 'btn btn-warning'%>
+      <table class="table table-bordered table-striped">
+        <tr>
+          <th>st number</th>
+          <th>st name</th>
+          <th>st side</th>
+          <th>number of racks</th>
+        </tr>
+       
+        <% @bike_racks.each do |bike_rack| %>
+          <tr>
+            <td><%= bike_rack.street_number %></td>
+            <td><%= bike_rack.street_name %></td>
+            <td><%= bike_rack.street_side %></td>
+            <td><%= bike_rack.number_of_racks %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+<body>
