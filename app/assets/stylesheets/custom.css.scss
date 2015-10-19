@@ -1,0 +1,36 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+/* universal */
+
+body {
+  padding-top: 100px;
+}
+
+.btn {
+  padding-top: 10px;
+  padding-left: 4px;
+  padding-down: 10px;
+  padding-right: 4px
+}
+
+.navbar-inner {
+  margin-left: 25px;
+  margin-right: 25px
+}
+
+.navbar {
+  height: 80px;
+}
+
+body> div div a .logo_hover {
+  display: none
+}
+
+body> div div a:hover .logo {
+  display: none
+}
+
+body> div div a:hover .logo_hover {
+  display: block
+}
