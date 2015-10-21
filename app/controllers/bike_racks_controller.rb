@@ -8,7 +8,6 @@ class BikeRacksController < ApplicationController
   end
 
   def full_update
-    BikeRack.delete_all
     update_bike_racks
     redirect_to bike_racks_path
   end
