@@ -72,3 +72,34 @@ body#front-body {
   -o-background-size: cover;
   background-size: cover;
 }
+
+section#team {
+  background: rgba(26,26,26,0.5);
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+section#services {
+  background: rgba(26,26,26,0.7);
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+section#about {
+  margin-top: 70px;
+  margin-left: 200px;
+  margin-bottom: 70px;
+  margin-right: 200px;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.text-center {
+    color: #fff;
+}
