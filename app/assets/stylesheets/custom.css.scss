@@ -39,9 +39,9 @@ div#left-column {
 .team-banner {
   display: table;
   width: 100%;
-  height: 500px;
-  color: #fff;
-  background: url(/media/tortoise.jpg) no-repeat center center scroll;-webkit-background-size: cover;
+  height: 550px;
+  color: #ccc;
+  background: rgba(26,26,26,0.7);
   -moz-background-size: cover;
   background-size: cover;
   -o-background-size: cover;
@@ -116,13 +116,12 @@ section#about {
   background-size: cover;
 }
 
-div#team-shadow {
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
 .text-center {
     color: #fff;
+}
+
+hr#team {
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0));
 }
