@@ -14,6 +14,8 @@ Rails.application.routes.draw do
     root 'welcome#index'
   end
 
+  get '/team' => "welcome#team"
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
