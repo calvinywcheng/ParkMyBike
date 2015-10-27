@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151016090730) do
+ActiveRecord::Schema.define(version: 20151027203005) do
 
   create_table "bike_racks", force: :cascade do |t|
     t.string   "street_number"
@@ -23,6 +23,11 @@ ActiveRecord::Schema.define(version: 20151016090730) do
     t.string   "install_year"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
