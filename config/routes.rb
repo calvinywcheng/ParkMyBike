@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'users/new'
-
   get 'welcome/index'
 
   # The priority is based upon order of creation: first created -> highest priority.
@@ -11,8 +9,6 @@ Rails.application.routes.draw do
 
   Rails.application.routes.draw do
    
-  get 'users/new'
-
     resources :bike_racks
    
     root 'welcome#index'
