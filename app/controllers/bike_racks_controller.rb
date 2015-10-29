@@ -3,6 +3,9 @@ require 'open-uri'
 require 'csv'
 
 class BikeRacksController < ApplicationController
+
+  BIKE_RACK_URI = 'ftp://webftp.vancouver.ca/opendata/bike_rack/BikeRackData.csv'
+
   def index
     @bike_racks = BikeRack.all
   end
@@ -15,25 +18,20 @@ class BikeRacksController < ApplicationController
   private
 
   def update_bike_racks
-    CSV.foreach(fatch_bike_rack_csv, :headers => true) do |rack_data|
+    CSV.foreach(open(BIKE_RACK_URI), headers: true) do |rack_data|
       store_one_bike_rack (rack_data)
     end
   end
 
-  def fatch_bike_rack_csv
-    url = "ftp://webftp.vancouver.ca/opendata/bike_rack/BikeRackData.csv"
-    return open(url)
-  end
-
   def store_one_bike_rack (data)
     bike_rack = BikeRack.new(
-      street_number: data[0],
-      street_name: data[1],
-      street_side: data[2],
-      sky_train_station_name: data[3],
-      bia: data[4],
-      number_of_racks: data[5],
-      install_year: data[6])
+      street_number: data['St Number'],
+      street_name: data['St Name'],
+      street_side: data['Street Side'],
+      sky_train_station_name: data['Skytrain Station Name'],
+      bia: data['BIA'],
+      number_of_racks: data['# of racks'],
+      install_year: data['Years Installed'])
     bike_rack.save
   end 
 end
