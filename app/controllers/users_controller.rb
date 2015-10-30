@@ -4,11 +4,11 @@ class UsersController < ApplicationController
 
   def new
       #Signup Form
-      @user = User.new     
+      @user = User.new
   end
 
    def create
-    	@user = User.new(params[:user])
+    	@user = User.new(user_params)
     	if @user.save
     		flash[:notice] = "You Signed up successfully"
         flash[:color]= "valid"
@@ -17,6 +17,12 @@ class UsersController < ApplicationController
         flash[:color]= "invalid"
       end
       render "new"
+    end
+
+  private
+
+    def user_params
+      params.require(:user).permit(:username, :email, :password, :password_confirmation)
     end
 
 end

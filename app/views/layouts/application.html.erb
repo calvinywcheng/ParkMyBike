@@ -18,11 +18,17 @@
           <ul class="nav navbar-nav navbar-left">
             <li><%= link_to "Our Team", href="/team"%></li>
             <li><%= link_to "Home", href="/"%></li>
-            <li><%= link_to "Bike Racks", bike_racks_path%></li>
+            <li><%= link_to "Create Account", href="/users/new"%></li>
+            <li><%= link_to "Log In", href="/sessions/login"%></li>
+            <li><%= link_to "Log Out", href="/sessions/logout"%></li>
           </ul>
        </div>
     </div>
   </header>
+  <!-- flash notice -->
+  <% flash.each do |name, msg| -%>
+      <%= content_tag :div, msg, class: name %>
+    <% end -%>s
 <%= yield %>
 
 </body>
