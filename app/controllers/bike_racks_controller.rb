@@ -48,7 +48,6 @@ class BikeRacksController < ApplicationController
   end
 
   def handle_validation_error (bike_rack)
-    # TODO flash?
     logger.warn 'Model validation error: ' +
                 "#{@bike_rack.street_number} #{@bike_rack.street_name}: " +
                 @bike_rack.errors.full_messages.first
