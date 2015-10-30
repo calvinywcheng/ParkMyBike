@@ -23,19 +23,28 @@ class BikeRacksController < ApplicationController
   private
 
   def update_bike_racks
+    error_count = 0
     CSV.foreach(open(BIKE_RACK_URI), headers: true) do |rack_data|
-      store_one_bike_rack rack_data
+      error_count += 1 unless store_one_bike_rack rack_data
     end
+
+    flash[:info] = "#{error_count} bike rack(s) were not parsed. " +
+        'See server log for details.'
+    logger.info "#{error_count} model validation errors found."
   end
 
   def store_one_bike_rack (data)
+    error_count = 0
     @bike_rack = BikeRack.new(
       street_number: data['St Number'],
       street_name: data['St Name'].strip,
       street_side: data['Street Side'].strip,
       number_of_racks: data['# of racks'])
 
-    handle_validation_error (@bike_rack) unless @bike_rack.save
+    unless @bike_rack.save
+      handle_validation_error (@bike_rack)
+      false
+    end
   end
 
   def handle_validation_error (bike_rack)
