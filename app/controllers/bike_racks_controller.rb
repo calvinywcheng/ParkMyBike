@@ -31,14 +31,14 @@ class BikeRacksController < ApplicationController
   def store_one_bike_rack (data)
     @bike_rack = BikeRack.new(
       street_number: data['St Number'],
-      street_name: data['St Name'],
-      street_side: data['Street Side'],
-      sky_train_station_name: data['Skytrain Station Name'],
-      bia: data['BIA'],
-      number_of_racks: data['# of racks'],
-      install_year: data['Years Installed'])
-    unless  @bike_rack.save
-      puts "#{@bike_rack.street_number} #{@bike_rack.street_name}"
-    end
-  end 
+      street_name: data['St Name'].strip,
+      street_side: data['Street Side'].strip,
+      number_of_racks: data['# of racks'])
+
+    handle_error (@bike_rack) unless @bike_rack.save
+  end
+
+  def handle_error (bike_rack)
+    # TODO Log error, flash?
+  end
 end
