@@ -1,24 +1,23 @@
 Rails.application.routes.draw do
+
+  get 'bike_racks/full_update', to: 'bike_racks#full_update', as: :full_update
+
+  resources :bike_racks
+
+  root 'welcome#index'
+
   get 'users/new'
 
   get 'welcome/index'
+
+  get '/team' => "welcome#team"
+
+end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  get 'bike_racks/full_update', to: 'bike_racks#full_update', as: :full_update
-
-  Rails.application.routes.draw do
-   
-  get 'users/new'
-
-    resources :bike_racks
-   
-    root 'welcome#index'
-  end
-
-  get '/team' => "welcome#team"
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
@@ -68,4 +67,3 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-end
