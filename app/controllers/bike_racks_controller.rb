@@ -24,7 +24,7 @@ class BikeRacksController < ApplicationController
 
   def update_bike_racks
     CSV.foreach(open(BIKE_RACK_URI), headers: true) do |rack_data|
-      store_one_bike_rack (rack_data)
+      store_one_bike_rack rack_data
     end
   end
 
@@ -40,7 +40,7 @@ class BikeRacksController < ApplicationController
 
   def handle_validation_error (bike_rack)
     # TODO flash?
-    logger.warn "Model validation error: " +
+    logger.warn 'Model validation error: ' +
                 "#{@bike_rack.street_number} #{@bike_rack.street_name}: " +
                 @bike_rack.errors.full_messages.first
   end

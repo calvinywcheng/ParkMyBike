@@ -37,7 +37,7 @@ Rails.application.configure do
   config.assets.raise_runtime_errors = true
 
   # Set logger level to warn
-  config.log_level = :warn
+  config.log_level = :info
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
