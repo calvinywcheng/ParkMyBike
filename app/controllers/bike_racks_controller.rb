@@ -4,14 +4,21 @@ require 'csv'
 
 class BikeRacksController < ApplicationController
 
-  BIKE_RACK_URI = 'ftp://webftp.vancouver.ca/opendata/bike_rack/BikeRackData.csv'
+  BIKE_RACK_URI = 'ftp://webftp.vancouver.ca/opendata/bike_rack/BikeRackData.cv'
 
   def index
     @bike_racks = BikeRack.all
   end
 
   def full_update
-    update_bike_racks
+    begin
+      racks_data = open BIKE_RACK_URI
+      update_bike_racks racks_data
+    rescue StandardError => e
+      flash[:alert] = "Problem opening bike rack URL: #{BIKE_RACK_URI}. " +
+          'Are things going okay over there?'
+      logger.error "Error fetching data: #{e}"
+    end
     redirect_to bike_racks_path
   end
 
@@ -22,9 +29,9 @@ class BikeRacksController < ApplicationController
 
   private
 
-  def update_bike_racks
+  def update_bike_racks (racks_data)
     error_count = 0
-    CSV.foreach(open(BIKE_RACK_URI), headers: true) do |rack_data|
+    CSV.foreach(open(racks_data), headers: true) do |rack_data|
       error_count += 1 unless store_one_bike_rack rack_data
     end
 
