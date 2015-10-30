@@ -6,8 +6,8 @@ class ApplicationController < ActionController::Base
   helper_method :is_logged_in
 
   protected
-  def authenticate_user
-    if session[:user_id]
+  def authenticate_user 
+    if session[:user_id] && User.exists?(session[:user_id])
         @current_user = User.find(session[:user_id])
         return true
     else
@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
   end
 
   def save_login_state
-    if session[:user_id]
+    if session[:user_id] && User.exists?(session[:user_id])
         redirect_to(:controller => 'sessions', :action => 'home')
         return false
     else
@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
   end
 
   def is_logged_in
-    if session[:user_id]
+    if session[:user_id] && User.exists?(session[:user_id])
       return User.find(session[:user_id]).username
     else
       return false
