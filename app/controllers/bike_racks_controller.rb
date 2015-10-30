@@ -34,7 +34,6 @@ class BikeRacksController < ApplicationController
   end
 
   def store_one_bike_rack (data)
-    error_count = 0
     @bike_rack = BikeRack.new(
       street_number: data['St Number'],
       street_name: data['St Name'].strip,
@@ -49,7 +48,7 @@ class BikeRacksController < ApplicationController
 
   def handle_validation_error (bike_rack)
     logger.warn 'Model validation error: ' +
-                "#{@bike_rack.street_number} #{@bike_rack.street_name}: " +
-                @bike_rack.errors.full_messages.first
+                "#{bike_rack.street_number} #{@bike_rack.street_name}: " +
+                bike_rack.errors.full_messages.first
   end
 end
