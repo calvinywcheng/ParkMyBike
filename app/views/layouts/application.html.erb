@@ -20,9 +20,14 @@
             <li><%= link_to "Home", href="/"%></li>
             <li><%= link_to "Bike Racks", bike_racks_path%></li>
           </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <%= render "users/navbar" %>
+          </ul>
        </div>
     </div>
   </header>
+  <!-- flash notice -->
+  <%= render "layouts/flash" %>
 <%= yield %>
 
 </body>
