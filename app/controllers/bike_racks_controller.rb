@@ -4,7 +4,7 @@ require 'csv'
 
 class BikeRacksController < ApplicationController
 
-  BIKE_RACK_URI = 'ftp://webftp.vancouver.ca/opendata/bike_rack/BikeRackData.cv'
+  BIKE_RACK_URI = 'ftp://webftp.vancouver.ca/opendata/bike_rack/BikeRackData.csv'
 
   def index
     @bike_racks = BikeRack.all
@@ -30,14 +30,21 @@ class BikeRacksController < ApplicationController
   private
 
   def update_bike_racks (racks_data)
-    error_count = 0
+    counter = {valid: 0, invalid: 0}
     CSV.foreach(open(racks_data), headers: true) do |rack_data|
-      error_count += 1 unless store_one_bike_rack rack_data
+      (store_one_bike_rack rack_data) ? counter[:valid] += 1 : counter[:invalid] += 1
     end
 
-    flash[:info] = "#{error_count} bike rack(s) were not parsed. " +
-        'See server log for details.'
-    logger.info "#{error_count} model validation errors found."
+    if counter[:invalid].zero?
+      flash[:notice] = "All #{counter[:valid]} bike racks parsed successfully!"
+    else
+      flash[:info] = "#{counter[:valid]} bike racks parsed successfully, and " +
+          "#{counter[:invalid]} bike rack(s) were not parsed. " +
+          'See server log for more details.'
+    end
+
+    logger.info "#{counter[:valid]} bike rack(s) parsed successfully."
+    logger.info "#{counter[:invalid]} model validation error(s) found."
   end
 
   def store_one_bike_rack (data)
@@ -47,10 +54,8 @@ class BikeRacksController < ApplicationController
       street_side: data['Street Side'].strip,
       number_of_racks: data['# of racks'])
 
-    unless @bike_rack.save
-      handle_validation_error (@bike_rack)
-      false
-    end
+    handle_validation_error(@bike_rack) unless @bike_rack.valid?
+    @bike_rack.save
   end
 
   def handle_validation_error (bike_rack)
