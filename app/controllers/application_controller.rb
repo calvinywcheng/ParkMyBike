@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
 
   def is_logged_in
     if session[:user_id]
-      return true
+      return User.find(session[:user_id]).username
     else
       return false
     end

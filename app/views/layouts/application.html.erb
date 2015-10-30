@@ -18,8 +18,10 @@
           <ul class="nav navbar-nav navbar-left">
             <li><%= link_to "Our Team", href="/team"%></li>
             <li><%= link_to "Home", href="/"%></li>
-            <li><%= link_to "Create Account", href="/users/new"%></li>
-            <%= render "layouts/log_in_out_link" %>
+            <li><%= link_to "Bike Racks", bike_racks_path%></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <%= render "users/navbar" %>
           </ul>
        </div>
     </div>
