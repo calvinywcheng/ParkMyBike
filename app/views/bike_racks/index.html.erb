@@ -7,21 +7,30 @@
 
   <div class="row">
     <div class="col-xs-2" id="bike-table">
-      <%= link_to 'Update', full_update_path, class: 'btn btn-warning'%>
-      <%= link_to 'Clear', full_clear_path, class: 'btn btn-warning'%>
-      <table class="table table-bordered table-striped">
-        <tr>
-          <th>Address</th>
-          <th># of racks</th>
-        </tr>
-
-        <% @bike_racks.each do |bike_rack| %>
+      <% if @bike_racks.empty? %>
+        <%= link_to 'Update', full_update_path, class: 'btn btn-warning'%>
+        <p>
+            No entries in table.
+        </p>
+        <p>
+            <i>Why don't you press 'Update' to get some bike racks?</i>
+        </p>
+      <% else %>
+        <%= link_to 'Clear', full_clear_path, class: 'btn btn-warning'%>
+        <table class="table table-bordered table-striped">
           <tr>
-            <td><%= bike_rack.street_number %> <%= bike_rack.street_name %></td>
-            <td><%= bike_rack.number_of_racks %></td>
+            <th>Address</th>
+            <th># of racks</th>
           </tr>
-        <% end %>
-      </table>
+
+          <% @bike_racks.each do |bike_rack| %>
+            <tr>
+              <td><%= bike_rack.street_number %> <%= bike_rack.street_name %></td>
+              <td><%= bike_rack.number_of_racks %></td>
+            </tr>
+          <% end %>
+        </table>
+      <% end %>
     </div>
   </div>
 <body>
