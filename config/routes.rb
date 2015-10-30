@@ -8,9 +8,23 @@ Rails.application.routes.draw do
 
   get 'users/new'
 
+  post 'users/new' => 'users#create'
+
   get 'welcome/index'
 
   get '/team' => "welcome#team"
+
+  get 'sessions/login'
+
+  post 'sessions/login' => 'sessions#login_attempt'
+
+  get 'sessions/logout'
+
+  get 'sessions/home'
+
+  get 'sessions/profile'
+
+  get 'sessions/setting'
 
 end
 
