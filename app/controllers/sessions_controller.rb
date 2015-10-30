@@ -20,6 +20,7 @@ class SessionsController < ApplicationController
     authorized_user = User.authenticate(params[:username_or_email], params[:login_password])
     if authorized_user
         session[:user_id] = authorized_user.id
+        flash.clear
         redirect_to bike_racks_path
     else
         flash[:alert] = "Invalid Username or Password"
