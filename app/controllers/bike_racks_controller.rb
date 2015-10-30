@@ -32,7 +32,8 @@ class BikeRacksController < ApplicationController
   def update_bike_racks (racks_data)
     counter = {valid: 0, invalid: 0}
     CSV.foreach(open(racks_data), headers: true) do |rack_data|
-      (store_one_bike_rack rack_data) ? counter[:valid] += 1 : counter[:invalid] += 1
+      j kresult = store_one_bike_rack rack_data ? :valid : :invalid
+      counter[result] += 1
     end
 
     if counter[:invalid].zero?

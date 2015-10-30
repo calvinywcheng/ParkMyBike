@@ -12,6 +12,7 @@ class BikeRack < ActiveRecord::Base
   validates :street_side,
             presence: true,
             inclusion: { in: DIRECTIONS }
+  
   validates :number_of_racks,
             presence: true,
             numericality: { greater_than_or_equal_to: 1 }
