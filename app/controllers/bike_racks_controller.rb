@@ -35,10 +35,13 @@ class BikeRacksController < ApplicationController
       street_side: data['Street Side'].strip,
       number_of_racks: data['# of racks'])
 
-    handle_error (@bike_rack) unless @bike_rack.save
+    handle_validation_error (@bike_rack) unless @bike_rack.save
   end
 
-  def handle_error (bike_rack)
-    # TODO Log error, flash?
+  def handle_validation_error (bike_rack)
+    # TODO flash?
+    logger.warn "Model validation error: " +
+                "#{@bike_rack.street_number} #{@bike_rack.street_name}: " +
+                @bike_rack.errors.full_messages.first
   end
 end
