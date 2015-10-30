@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
-  get 'bike_racks/full_update', to: 'bike_racks#full_update', as: :full_update
+  get 'bike_racks/full_update' => 'bike_racks#full_update', as: :full_update
+  get 'bike_racks/full_clear' => 'bike_racks#full_clear', as: :full_clear
 
   resources :bike_racks
 
