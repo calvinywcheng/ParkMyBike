@@ -1,8 +1,10 @@
 <%= link_to 'Clear', full_clear_path, class: 'btn btn-warning'%>
-<table class="table table-bordered table-striped">
-    <tr>
-        <th>Address</th>
-        <th># of racks</th>
-    </tr>
-    <%= render @bike_racks %>
-</table>
+<div id="bike-table">
+  <table class="table table-bordered table-striped">
+      <tr>
+          <th>Address</th>
+          <th># of racks</th>
+      </tr>
+      <%= render @bike_racks %>
+  </table>
+</div>

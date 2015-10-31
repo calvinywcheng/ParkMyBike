@@ -1,17 +1,16 @@
 <body>
-  <div class="container">
-    <div class="col-xs-8 affix nav-stacked" id="right-column">
-      <img class = "logo logo_default " src="/media/dummymap.png" height="1400" width="1400">
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-xs-2" id="bike-table">
-      <% if @bike_racks.empty? %>
-        <%= render 'empty_bike_racks' %>
-      <% else %>
-        <%= render 'table_bike_racks' %>
-      <% end %>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-4" id="bike-table-column">
+        <% if @bike_racks.empty? %>
+          <%= render 'empty_bike_racks' %>
+        <% else %>
+          <%= render 'table_bike_racks' %>
+        <% end %>
+      </div>
+      <div class="col-xs-8">
+          <img class = "img-responsive" src="/media/dummymap.png">
+      </div>
     </div>
   </div>
 <body>
