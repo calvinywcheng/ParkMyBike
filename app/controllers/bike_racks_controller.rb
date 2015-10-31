@@ -32,14 +32,14 @@ class BikeRacksController < ApplicationController
   def update_bike_racks (racks_data)
     counter = {valid: 0, invalid: 0}
     CSV.foreach(open(racks_data), headers: true) do |rack_data|
-      j kresult = store_one_bike_rack rack_data ? :valid : :invalid
+      result = store_one_bike_rack(rack_data) ? :valid : :invalid
       counter[result] += 1
     end
 
     if counter[:invalid].zero?
-      flash[:notice] = "All #{counter[:valid]} bike racks parsed successfully!"
+      flash[:notice] = "All #{counter[:valid]} bike rack(s) parsed successfully!"
     else
-      flash[:info] = "#{counter[:valid]} bike racks parsed successfully, and " +
+      flash[:info] = "#{counter[:valid]} bike rack(s) parsed successfully, and " +
           "#{counter[:invalid]} bike rack(s) were not parsed. " +
           'See server log for more details.'
     end
