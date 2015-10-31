@@ -1,18 +1,27 @@
 <% flash.each do |name, msg| %>
-    <% if name == 'notice' %>
-        <div class="alert alert-success alert-dismissible" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <strong>Success!</strong> <%= msg %>
-        </div>
-    <% elsif name == 'alert' %>
-        <div class="alert alert-danger alert-dismissible" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <strong>Oh No!</strong> <%= msg %>
-        </div>
-    <% else %>
-        <div class="alert alert-info alert-dismissible" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <strong>Heads up!</strong> <%= msg %>
-        </div>
-    <% end %>
+  <% case name %>
+  <% when 'notice', 'success' %>
+    <%= render partial: 'layouts/alert',
+               locals: {context: 'alert-success',
+                        msg_start: 'Success!',
+                        msg_body: msg} %>
+
+  <% when 'info' %>
+    <%= render partial: 'layouts/alert',
+               locals: {context: 'alert-info',
+                        msg_start: 'Heads up!',
+                        msg_body: msg} %>
+
+  <% when 'alert', 'warn' %>
+    <%= render partial: 'layouts/alert',
+               locals: {context: 'alert-warning',
+                        msg_start: 'Warning!',
+                        msg_body: msg} %>
+
+  <% when 'danger', 'error', 'fatal' %>
+    <%= render partial: 'layouts/alert',
+               locals: {context: 'alert-danger',
+                        msg_start: 'Uh oh.',
+                        msg_body: msg} %>
+  <% end %>
 <% end %>
