@@ -11,3 +11,13 @@ We will be adhering to the Ruby and Rails coding style guidelines set out in the
 Ruby: https://github.com/bbatsov/ruby-style-guide
 
 Rails: https://github.com/bbatsov/rails-style-guide
+
+We will be following a "Feature branch" workflow to manage our work. This provides us with the ability to review other's commits before submitting to `master`, as well as to ensure that the `master` branch always represents the last "best" version of the team's effort.
+
+More information here: https://www.atlassian.com/git/tutorials/comparing-workflows/centralized-workflow
+
+## Other potentially useful links
+
+User Authentication:
+* http://www.sitepoint.com/rails-userpassword-authentication-from-scratch-part-i/
+* https://www.railstutorial.org/book/modeling_users
