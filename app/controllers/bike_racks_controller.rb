@@ -23,6 +23,7 @@ class BikeRacksController < ApplicationController
   end
 
   def full_clear
+    flash[:success] = "All #{BikeRack.count} bike rack entries cleared."
     BikeRack.delete_all
     redirect_to bike_racks_path
   end

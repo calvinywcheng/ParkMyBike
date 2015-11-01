@@ -1,3 +1,12 @@
 // Place all the styles related to the bike_racks controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+div#bike-table-column {
+  background: #ccc;
+}
+
+#bike-table {
+  height: 900px;
+  overflow: scroll;
+}
