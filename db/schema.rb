@@ -25,7 +25,6 @@ ActiveRecord::Schema.define(version: 20151028184124) do
   create_table "users", force: :cascade do |t|
     t.string   "username"
     t.string   "email"
-    t.boolean  "is_admin"
     t.string   "encrypted_password"
     t.string   "salt"
     t.datetime "created_at"

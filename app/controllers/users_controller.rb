@@ -9,7 +9,6 @@ class UsersController < ApplicationController
 
    def create
       @user = User.new(user_params)
-      @user.is_admin = false;
       if @user.save
         flash[:notice] = "You Signed up successfully"
         redirect_to sessions_login_path

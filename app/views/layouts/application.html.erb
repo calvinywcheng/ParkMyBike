@@ -19,9 +19,7 @@
             <li><%= link_to "Home", href="/"%></li>
             <li><%= link_to "Our Team", href="/team"%></li>
             <li><%= link_to "Bike Racks", bike_racks_path%></li>
-            <% if is_admin? %>
-              <li><%= link_to "Internal", href="/"%></li>
-            <% end %>
+            <li><%= link_to "Internal", href="/"%></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <%= render "users/navbar" %>

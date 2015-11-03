@@ -20,7 +20,6 @@ class SessionsController < ApplicationController
     authorized_user = User.authenticate(params[:username_or_email], params[:login_password])
     if authorized_user
         session[:user_id] = authorized_user.id
-        session[:user_is_admin] = authorized_user.is_admin
         flash.clear
         redirect_to bike_racks_path
     else
