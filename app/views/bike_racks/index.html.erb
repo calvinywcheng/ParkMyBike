@@ -18,11 +18,7 @@
   <body>
     <%= render 'map' %>
     <div class="col-xs-4" id="bike-table-column">
-        <% if @bike_racks.empty? %>
-          <%= render 'empty_bike_racks' %>
-        <% else %>
-          <%= render 'table_bike_racks' %>
-        <% end %>
+      <%= render 'table_bike_racks' %>
     </div>
       </body>
 </html>

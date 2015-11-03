@@ -10,8 +10,13 @@ class BikeRacksController < ApplicationController
     @bike_racks = BikeRack.all
   end
 
+  def internal
+    @bike_racks = BikeRack.all
+  end
+
   def full_update
     begin
+      BikeRack.delete_all  ##TODO bad practice deleting all
       racks_data = open BIKE_RACK_URI
       update_bike_racks racks_data
     rescue StandardError => e
@@ -19,13 +24,7 @@ class BikeRacksController < ApplicationController
           'Are things going okay over there?'
       logger.error "Error fetching data: #{e}"
     end
-    redirect_to bike_racks_path
-  end
-
-  def full_clear
-    flash[:success] = "All #{BikeRack.count} bike rack entries cleared."
-    BikeRack.delete_all
-    redirect_to bike_racks_path
+    redirect_to internal_path
   end
 
   private

@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
 
   get 'bike_racks/full_update' => 'bike_racks#full_update', as: :full_update
-  get 'bike_racks/full_clear' => 'bike_racks#full_clear', as: :full_clear
 
   resources :bike_racks, only: :index
 
@@ -14,6 +13,8 @@ Rails.application.routes.draw do
   get 'welcome/index'
 
   get '/team' => "welcome#team"
+
+  get '/internal' => "bike_racks#internal"
 
   get 'sessions/login'
 
