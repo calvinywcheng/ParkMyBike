@@ -51,7 +51,7 @@ class BikeRacksController < ApplicationController
 
   def store_one_bike_rack (data)
     @bike_rack = BikeRack.new(
-      street_number: data['St Number'],
+      street_number: data['St Number'].strip,
       street_name: data['St Name'].strip,
       street_side: data['Street Side'].strip,
       number_of_racks: data['# of racks'])

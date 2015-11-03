@@ -4,13 +4,13 @@
 </div>
 <%= render 'search_box' %>
 <div id="bike-table">
-    <table class="table table-bordered table-hover table-condensed">
-        <tr>
-            <th>Address</th>
-            <th>Side of street</th>
-            <th># of racks</th>
-        </tr>
-        <%= render @bike_racks %>
+    <table class="table table-hover table-condensed">
+        <% @bike_racks.each do |bike_rack| %>
+          <tr>
+            <td><%= bike_rack.street_number %>, <%= bike_rack.street_name %></td>
+            <td><%= bike_rack.number_of_racks %> bike racks</td>
+          </tr>
+        <% end %>
     </table>
 </div>
 
