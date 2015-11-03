@@ -15,10 +15,13 @@ div#bike-table-column {
   background: #ccc;
 }
 
-#map {
-  position:fixed;
-  left: 0px;
-  top: 0px;
-  height: 100vh;
-  height: 100vw;
+#bike-rack-body, #bike-rack-html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
+
+#map {
+  height: 100%;
+}
+  
