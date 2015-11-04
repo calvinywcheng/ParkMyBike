@@ -25,3 +25,11 @@ window.setTimeout(function() {
 }, 5000);
 
 });
+
+var map;
+function initMap() {
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: 49.27, lng: -123.16338},
+    zoom: 13
+  });
+}

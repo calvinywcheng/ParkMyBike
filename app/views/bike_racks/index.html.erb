@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html id='bike-rack-html'>
   <body id='bike-rack-body'> 
-    <%= render 'map' %>
+    <div id="map"></div>
     <div class="col-xs-4" id="bike-table-column">
       <%= render 'table_bike_racks' %>
     </div>
   </body>
 </html>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjOrbjfVvqyAucNEt1tP7rC-HfhvdyY1o&callback=initMap"
+  async defer>
+</script>
