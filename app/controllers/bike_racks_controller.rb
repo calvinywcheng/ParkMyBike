@@ -16,7 +16,6 @@ class BikeRacksController < ApplicationController
 
   def full_update
     begin
-      BikeRack.delete_all  ##TODO bad practice deleting all
       racks_data = open BIKE_RACK_URI
       update_bike_racks racks_data
     rescue StandardError => e
