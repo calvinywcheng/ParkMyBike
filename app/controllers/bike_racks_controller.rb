@@ -7,11 +7,11 @@ class BikeRacksController < ApplicationController
   BIKE_RACK_URI = 'ftp://webftp.vancouver.ca/opendata/bike_rack/BikeRackData.csv'
 
   def index
-    @bike_racks = BikeRack.all
+    @bike_racks = BikeRack.search(params[:search])
   end
 
   def internal
-    @bike_racks = BikeRack.all
+    @bike_racks = BikeRack.search(params[:search])
   end
 
   def full_update
