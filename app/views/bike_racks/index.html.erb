@@ -1,16 +1,9 @@
-<body>
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-xs-4" id="bike-table-column">
-        <% if @bike_racks.empty? %>
-          <%= render 'empty_bike_racks' %>
-        <% else %>
-          <%= render 'table_bike_racks' %>
-        <% end %>
-      </div>
-      <div class="col-xs-8">
-          <img class = "img-responsive" src="/media/dummymap.png">
-      </div>
+<!DOCTYPE html>
+<html id='bike-rack-html'>
+  <body id='bike-rack-body'> 
+    <%= render 'map' %>
+    <div class="col-xs-4" id="bike-table-column">
+      <%= render 'table_bike_racks' %>
     </div>
-  </div>
-<body>
+  </body>
+</html>

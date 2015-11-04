@@ -3,10 +3,25 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 div#bike-table-column {
-  background: #ccc;
+  position:fixed;
+  left: 0px;
+  top: 75px;
 }
 
 #bike-table {
-  height: 900px;
+  height: calc(100vh - 100px);
   overflow: scroll;
+  opacity: 0.8;
+  background: #ccc;
 }
+
+#bike-rack-body, #bike-rack-html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#map {
+  height: 100%;
+}
+  

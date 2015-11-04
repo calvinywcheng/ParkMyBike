@@ -10,6 +10,10 @@ class BikeRacksController < ApplicationController
     @bike_racks = BikeRack.all
   end
 
+  def internal
+    @bike_racks = BikeRack.all
+  end
+
   def full_update
     begin
       racks_data = open BIKE_RACK_URI
@@ -19,13 +23,7 @@ class BikeRacksController < ApplicationController
           'Are things going okay over there?'
       logger.error "Error fetching data: #{e}"
     end
-    redirect_to bike_racks_path
-  end
-
-  def full_clear
-    flash[:success] = "All #{BikeRack.count} bike rack entries cleared."
-    BikeRack.delete_all
-    redirect_to bike_racks_path
+    redirect_to internal_path
   end
 
   private
@@ -51,7 +49,7 @@ class BikeRacksController < ApplicationController
 
   def store_one_bike_rack (data)
     @bike_rack = BikeRack.new(
-      street_number: data['St Number'],
+      street_number: data['St Number'].strip,
       street_name: data['St Name'].strip,
       street_side: data['Street Side'].strip,
       number_of_racks: data['# of racks'])

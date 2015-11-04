@@ -1,16 +1,7 @@
-<div class="btn-group btn-group-justified" role="group" aria-label="...">
-    <%= link_to 'Update', full_update_path, class: 'btn btn-primary disabled' %>
-    <%= link_to 'Clear', full_clear_path, class: 'btn btn-primary' %>
-</div>
 <%= render 'search_box' %>
 <div id="bike-table">
-    <table class="table table-bordered table-striped table-hover table-condensed">
-        <tr>
-            <th>Address</th>
-            <th>Side of street</th>
-            <th># of racks</th>
-        </tr>
-        <%= render @bike_racks %>
+    <table class="table table-hover table-condensed">
+      <%= render @bike_racks %>
     </table>
 </div>
 
