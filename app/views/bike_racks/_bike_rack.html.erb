@@ -1,4 +1,7 @@
 <tr>
   <td><%= bike_rack.street_number %> <%= bike_rack.street_name %></td>
-  <td><%= bike_rack.number_of_racks %> bike racks</td>
+  <td><%= bike_rack.number_of_racks %> bike rack(s)</td>
 </tr>
+<script type="text/javascript">
+  addMarker(<%= bike_rack.latitude %>, <%= bike_rack.longitude %>);
+</script>

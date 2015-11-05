@@ -25,3 +25,11 @@ window.setTimeout(function() {
 }, 5000);
 
 });
+
+function addMarker(latitude, longitude) {
+  var marker = new google.maps.Marker({
+    position: {lat: latitude, lng: longitude},
+    map: map,
+  });
+}
+

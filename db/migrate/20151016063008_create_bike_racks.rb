@@ -5,6 +5,8 @@ class CreateBikeRacks < ActiveRecord::Migration
       t.string :street_name
       t.string :street_side
       t.integer :number_of_racks
+      t.float :latitude
+      t.float :longitude
       t.timestamps null: false
     end
   end
