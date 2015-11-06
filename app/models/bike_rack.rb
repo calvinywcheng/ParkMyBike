@@ -1,4 +1,13 @@
 class BikeRack < ActiveRecord::Base
+
+  def self.search(search)
+    if search
+      where('street_name LIKE ?', "%#{search}%")
+    else
+      all
+    end
+  end
+
   DIRECTIONS = %w(North West East South)
 
   validates :street_name,
