@@ -2,6 +2,12 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 div#bike-table-column {
   position:fixed;
   left: 0px;
@@ -15,13 +21,6 @@ div#bike-table-column {
   background: #ccc;
 }
 
-#bike-rack-body, #bike-rack-html {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
-
 #map {
   height: 100%;
 }
-  
