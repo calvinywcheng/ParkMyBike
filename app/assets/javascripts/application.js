@@ -26,10 +26,3 @@ window.setTimeout(function() {
 
 });
 
-function addMarker(latitude, longitude) {
-  var marker = new google.maps.Marker({
-    position: {lat: latitude, lng: longitude},
-    map: map,
-  });
-}
-
