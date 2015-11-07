@@ -16,7 +16,8 @@ class BikeRacksController < ApplicationController
 
   def full_update
     begin
-      update_all_bike_racks
+      racks_data = open BIKE_RACK_URI
+      update_bike_racks racks_data
     rescue StandardError => e
       handle_full_update_error e
     end
@@ -25,38 +26,13 @@ class BikeRacksController < ApplicationController
 
   private
 
-  def update_all_bike_racks
-    racks_data = open BIKE_RACK_URI
-    update_bike_racks racks_data
-  end
-
-  def handle_full_update_error (e)
-    flash[:alert] = "Problem opening bike rack URL: #{BIKE_RACK_URI}. " +
-        'Are things going okay over there?'
-    logger.error "Error fetching data: #{e}"
-  end
-
   def update_bike_racks (racks_data)
     counter = {valid: 0, invalid: 0}
     CSV.foreach(open(racks_data), headers: true) do |rack_data|
       result = store_one_bike_rack(rack_data) ? :valid : :invalid
       counter[result] += 1
     end
-
-    display_update_bike_racks_flash counter
-
-    logger.info "#{counter[:valid]} bike rack(s) parsed successfully."
-    logger.info "#{counter[:invalid]} model validation error(s) found."
-  end
-
-  def display_update_bike_racks_flash (counter)
-    if counter[:invalid].zero?
-      flash[:notice] = "All #{counter[:valid]} bike rack(s) parsed successfully!"
-    else
-      flash[:info] = "#{counter[:valid]} bike rack(s) parsed successfully, and " +
-          "#{counter[:invalid]} bike rack(s) were not parsed. " +
-          'See server log for more details.'
-    end
+    handle_finished_parsing counter
   end
 
   def store_one_bike_rack (data)
@@ -70,10 +46,28 @@ class BikeRacksController < ApplicationController
     @bike_rack.save
   end
 
+  def handle_full_update_error (e)
+    flash[:alert] = "Problem opening bike rack URL: #{BIKE_RACK_URI}. " +
+        'Are things going okay over there?'
+    logger.error "Error fetching data: #{e}"
+  end
+
   def handle_validation_error (bike_rack)
     logger.warn 'Model validation error: ' +
                 "#{bike_rack.street_number} #{@bike_rack.street_name}: " +
                 bike_rack.errors.full_messages.first
   end
-  
+
+  def handle_finished_parsing (counter)
+    if counter[:invalid].zero?
+      flash[:notice] = "All #{counter[:valid]} bike rack(s) parsed successfully!"
+    else
+      flash[:info] = "#{counter[:valid]} bike rack(s) parsed successfully, and " +
+          "#{counter[:invalid]} bike rack(s) were not parsed. " +
+          'See server log for more details.'
+    end
+    logger.info "#{counter[:valid]} bike rack(s) parsed successfully."
+    logger.info "#{counter[:invalid]} model validation error(s) found."
+  end
+
 end

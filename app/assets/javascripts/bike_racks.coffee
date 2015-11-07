@@ -6,7 +6,7 @@ window.initialize = ->
   mapOptions =
     zoom: 13
     center: new google.maps.LatLng(49.27, -123.16338)
-  map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions)
+  map = new google.maps.Map(document.getElementById("map"), mapOptions)
   return
 
 $(document).on 'ready page:load', ->
