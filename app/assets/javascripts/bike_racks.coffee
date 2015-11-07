@@ -6,7 +6,23 @@ window.initialize = ->
   mapOptions =
     zoom: 13
     center: new google.maps.LatLng(49.27, -123.16338)
-  map = new google.maps.Map(document.getElementById("map"), mapOptions)
+  window.map = new google.maps.Map(document.getElementById("map"), mapOptions)
+  window.addMarkers()
+  return
+
+window.addMarkers = ->
+  $(".bike-rack-row").each (index, element) =>
+    lat = $(element).data("lat")
+    lon = $(element).data("lon")
+    window.addMarker(lat, lon) if isFinite(lat) && isFinite(lon)
+  return
+
+window.addMarker = (latitude, longitude) ->
+  marker = new google.maps.Marker(
+    position:
+      lat: latitude
+      lng: longitude
+    map: window.map)
   return
 
 $(document).on 'ready page:load', ->
