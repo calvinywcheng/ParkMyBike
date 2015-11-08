@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   get 'bike_racks/full_update' => 'bike_racks#full_update', as: :full_update
 
-  resources :bike_racks, only: :index
+  resources :bike_racks, only: [:index, :show]
 
   root 'welcome#index'
 

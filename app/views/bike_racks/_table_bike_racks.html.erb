@@ -1,7 +1,10 @@
 <%= render 'search_box' %>
-<div id="bike-table">
-    <table class="table table-hover table-condensed">
-      <%= render @bike_racks %>
-    </table>
-</div>
+<% unless @bike_racks.empty? %>
+  <div id="bike-table">
 
+      <table class="table table-hover table-condensed">
+          <%= render @bike_racks %>
+      </table>
+
+  </div>
+<% end %>
