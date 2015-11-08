@@ -64,7 +64,7 @@ window.addCurrentLocation = ->
         lng: position.coords.longitude
       map: map
       icon:
-        url: "/assets/my_location.png")
+        url: "<%= asset_path 'my_location.png' %>")
     bounds.extend marker.position
     map.panTo marker.position
     marker.addListener('click', ->
