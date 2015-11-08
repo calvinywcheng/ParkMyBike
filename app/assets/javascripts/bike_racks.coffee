@@ -5,7 +5,7 @@
 window.loadGoogleMaps = ->
   script = document.createElement("script")
   script.type = "text/javascript"
-  script.src = "http://maps.googleapis.com/maps/api/js?key=AIzaSyDjOrbjfVvqyAucNEt1tP7rC-HfhvdyY1o&callback=googleMapsLoaded"
+  script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyDjOrbjfVvqyAucNEt1tP7rC-HfhvdyY1o&callback=googleMapsLoaded"
   script.async = true
   document.body.appendChild script
   return
@@ -101,7 +101,7 @@ window.makeBikeRackPanelTranslucent = ->
   console.log bgStr + " " + newBg + " " + $(panelBody).css("background-color")
   return
 
-$(document).on 'ready page:load', ->
-  loadGoogleMaps()
-  makeBikeRackPanelTranslucent()
+$(document).ready ->
+  loadGoogleMaps() if $("#map")[0]? || $("street-view")[0]?
+  makeBikeRackPanelTranslucent() if $("#bike-rack-detailed-info")[0]?
   return
