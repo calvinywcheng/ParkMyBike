@@ -3,9 +3,10 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 window.initializeMap = ->
+  VANCOUVER_CENTRE = new google.maps.LatLng(49.2571858, -123.1349002)
   mapOptions =
     zoom: 13
-    center: new google.maps.LatLng(49.27, -123.16338)
+    center: VANCOUVER_CENTRE
   window.map = new google.maps.Map(document.getElementById("map"), mapOptions)
   window.addMarkers()
   return
