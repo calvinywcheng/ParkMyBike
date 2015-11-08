@@ -11,9 +11,9 @@
             <div id="street-view"
                  data-lat="<%= @bike_rack.latitude %>"
                  data-lon="<%= @bike_rack.longitude %>"></div>
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <table class="table" id="bike-rack-detailed-info">
+            <div class="panel panel-default" id="bike-rack-inner-panel">
+                <div class="panel-body" id="bike-rack-detailed-info-container">
+                    <table class="table table-responsive" id="bike-rack-detailed-info">
                         <tr>
                             <td>Address</td>
                             <td><%= @bike_rack.street_number %>

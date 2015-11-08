@@ -56,8 +56,8 @@ window.renderStreetView = ->
     window.streetView = new google.maps.StreetViewPanorama(
       element,
       position: new google.maps.LatLng(lat, lon)
-      addressControl: false
-      #clickToGo: false
+      addressControl: true
+      clickToGo: true
       enableCloseButton: false)
   return
 
@@ -72,3 +72,7 @@ $(document).on 'ready page:load', ->
   script.src = "http://maps.googleapis.com/maps/api/js?key=AIzaSyDjOrbjfVvqyAucNEt1tP7rC-HfhvdyY1o&callback=googleMapsLoaded"
   document.body.appendChild script
   return
+
+$(document).on 'ready page:load', ->
+  streetViewElem = $("#street-view")[0]
+  $(streetViewElem).height($(streetViewElem).width() * 9/16);

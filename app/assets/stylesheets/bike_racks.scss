@@ -36,10 +36,6 @@ div#bike-table-column * {
   background: #ccc;
 }
 
-#map {
-  height: 100%;
-}
-
 table#bike-rack-detailed-info tr td:first-child {
   font-weight: bold;
 }
@@ -49,7 +45,11 @@ table#bike-rack-detailed-info tr td:first-child {
 }
 
 #street-view {
-  height: 20vw;
+  height: 17vw;
+}
+
+#map {
+  height: 100%;
 }
 
 .gm-style-mtc, .gmnoprint a, .gmnoprint span, .gm-style-cc {
