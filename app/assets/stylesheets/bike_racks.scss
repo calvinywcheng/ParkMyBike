@@ -32,15 +32,24 @@ div#bike-table-column * {
 }
 
 #bike-rack-info {
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
   opacity: 0.8;
   background: #ccc;
 }
 
 #map {
   height: 100%;
+}
+
+table#bike-rack-detailed-info tr td:first-child {
+  font-weight: bold;
+}
+
+#street-view-container {
+  width:100%;
+}
+
+#street-view {
+  height: 20vw;
 }
 
 #map .gm-style-mtc {

@@ -1,48 +1,44 @@
 <div id="map"></div>
 <div class="col-xs-4" id="bike-table-column">
-    <div class="panel panel-default map-marker" id="bike-rack-info"
+    <%= render 'search_box' %>
+    <div class="panel panel-primary map-marker" id="bike-rack-info"
          data-lat="<%= @bike_rack.latitude %>"
          data-lon="<%= @bike_rack.longitude %>">
         <div class="panel-heading">
             <h1 class="panel-title">Bike Rack Information</h1>
         </div>
         <div class="panel-body">
+            <div id="street-view"
+                 data-lat="<%= @bike_rack.latitude %>"
+                 data-lon="<%= @bike_rack.longitude %>"></div>
             <div class="panel panel-default">
-                <div class="panel-heading">Address</div>
                 <div class="panel-body">
-                    <%= @bike_rack.street_number %> <%= @bike_rack.street_name %>
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">Number of Racks</div>
-                <div class="panel-body">
-                    <%= @bike_rack.number_of_racks %>
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">Latitude/Longitude</div>
-                <div class="panel-body">
-                    Latitude: <%= @bike_rack.latitude %><br>
-                    Longitude: <%= @bike_rack.longitude %>
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">Ratings</div>
-                <div class="panel-body">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">Safety</div>
-                        <div class="panel-body">
-                            Average rating: ??? (out of ???)<br>
-                            Your rating: ??? (out of ???)
-                        </div>
-                    </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading">Cleanliness</div>
-                        <div class="panel-body">
-                            Average rating: ??? (out of ???)<br>
-                            Your rating: ??? (out of ???)
-                        </div>
-                    </div>
+                    <table class="table" id="bike-rack-detailed-info">
+                        <tr>
+                            <td>Address</td>
+                            <td><%= @bike_rack.street_number %>
+                                <%= @bike_rack.street_name %></td>
+                        </tr>
+                        <tr>
+                            <td>Number of Racks</td>
+                            <td><%= @bike_rack.number_of_racks %></td>
+                        </tr>
+                        <tr>
+                            <td>Latitude / Longitude</td>
+                            <td>Latitude: <%= @bike_rack.latitude %><br>
+                                Longitude: <%= @bike_rack.longitude %></td>
+                        </tr>
+                        <tr>
+                            <td>Safety Rating</td>
+                            <td>Average rating: ??? (out of ???)<br>
+                                Your rating: ??? (out of ???)</td>
+                        </tr>
+                        <tr>
+                            <td>Cleanliness Rating</td>
+                            <td>Average rating: ??? (out of ???)<br>
+                                Your rating: ??? (out of ???)</td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>

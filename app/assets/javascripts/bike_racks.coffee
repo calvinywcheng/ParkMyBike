@@ -2,13 +2,18 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-window.initializeMap = ->
+window.googleMapsLoaded = ->
+  renderMainMap()
+  renderStreetView()
+  return
+
+window.renderMainMap = ->
   VANCOUVER_CENTRE = new google.maps.LatLng(49.234424, -123.1023147)
   mapOptions =
     zoom: 12
     maxZoom: 18
     center: VANCOUVER_CENTRE
-  window.map = new google.maps.Map(document.getElementById("map"), mapOptions)
+  window.map = new google.maps.Map($("#map")[0], mapOptions)
   addCurrentLocation()
   addMarkers()
   return
@@ -18,8 +23,7 @@ window.addMarkers = ->
   $(".map-marker").each (index, element) =>
     lat = $(element).data("lat")
     lon = $(element).data("lon")
-    isNum = (n) -> typeof n is 'number' && isFinite n
-    window.addMarker(lat, lon, bounds) if isNum(lat) && isNum(lon)
+    window.addMarker(lat, lon, bounds) if isValidLatLon(lat, lon)
   map.fitBounds(bounds) unless bounds.isEmpty()
   return
 
@@ -37,16 +41,34 @@ window.addCurrentLocation = ->
         lng: position.coords.longitude
       map: map
       icon:
-        url: "media/my_location.png"
+        url: "/assets/my_location.png"
         scaledSize: new google.maps.Size(25, 25))
-    bounds.extend marker.position
   if navigator.geolocation
     navigator.geolocation.getCurrentPosition(placeMarker)
   return
 
+window.renderStreetView = ->
+  element = $("#street-view")[0]
+  lat = $(element).data("lat")
+  lon = $(element).data("lon")
+  if isValidLatLon(lat, lon)
+    console.log "lat lon valid"
+    window.streetView = new google.maps.StreetViewPanorama(
+      element,
+      position: new google.maps.LatLng(lat, lon)
+      addressControl: false
+      #clickToGo: false
+      enableCloseButton: false)
+  return
+
+window.isValidLatLon = (lat, lon) ->
+  isNum = (n) ->
+    return typeof n is 'number' && isFinite n
+  isNum(lat) && isNum(lon)
+
 $(document).on 'ready page:load', ->
   script = document.createElement("script")
   script.type = "text/javascript"
-  script.src = "http://maps.googleapis.com/maps/api/js?key=AIzaSyDjOrbjfVvqyAucNEt1tP7rC-HfhvdyY1o&callback=initializeMap"
+  script.src = "http://maps.googleapis.com/maps/api/js?key=AIzaSyDjOrbjfVvqyAucNEt1tP7rC-HfhvdyY1o&callback=googleMapsLoaded"
   document.body.appendChild script
   return
