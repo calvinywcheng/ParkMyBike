@@ -18,48 +18,50 @@ window.renderMainMap = ->
   VANCOUVER_CENTRE = new google.maps.LatLng(49.234424, -123.1023147)
   mapOptions =
     zoom: 12
-    maxZoom: 18
+    maxZoom: 19
     center: VANCOUVER_CENTRE
     mapTypeControlOptions:
       position: google.maps.ControlPosition.TOP_RIGHT
     scaleControl: true
     rotateControl: true
   window.map = new google.maps.Map($("#map")[0], mapOptions)
+  window.bounds = new google.maps.LatLngBounds()
   addCurrentLocation()
   addMarkers()
   return
 
 window.addMarkers = ->
-  bounds = new google.maps.LatLngBounds()
   $(".map-marker").each (index, element) =>
     lat = $(element).data("lat")
     lon = $(element).data("lon")
     url = $(element).data("url")
-    window.addMarker(lat, lon, url, bounds) if isValidLatLon(lat, lon)
+    addMarker(lat, lon, url, bounds) if isValidLatLon(lat, lon)
   map.fitBounds(bounds) unless bounds.isEmpty()
   return
 
-window.addMarker = (latitude, longitude, url, bounds) ->
+window.addMarker = (latitude, longitude, url) ->
   marker = new google.maps.Marker(
     position:
       lat: latitude
       lng: longitude
     map: map)
-  bounds.extend marker.position
   google.maps.event.addListener(marker, 'click', -> window.location.href = url)
+  bounds.extend marker.position
   return
 
 window.addCurrentLocation = ->
-  placeMarker = (position) ->
-    marker = new google.maps.Marker(
-      position:
-        lat: position.coords.latitude
-        lng: position.coords.longitude
-      map: map
-      icon:
-        url: "/assets/my_location.png"
-        scaledSize: new google.maps.Size(25, 25))
-  navigator.geolocation.getCurrentPosition(placeMarker) if navigator.geolocation
+  if navigator.geolocation
+    navigator.geolocation.getCurrentPosition((position) ->
+      marker = new google.maps.Marker(
+        position:
+          lat: position.coords.latitude
+          lng: position.coords.longitude
+        map: map
+        icon:
+          url: "/assets/my_location.png")
+      bounds.extend marker.position
+      google.maps.event.addListener(marker, 'click', -> map.fitBounds(bounds))
+      return)
   return
 
 window.renderStreetView = ->
