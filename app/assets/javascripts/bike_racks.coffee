@@ -2,7 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-window.initialize = ->
+window.initializeMap = ->
   mapOptions =
     zoom: 13
     center: new google.maps.LatLng(49.27, -123.16338)
@@ -14,7 +14,8 @@ window.addMarkers = ->
   $(".bike-rack-row").each (index, element) =>
     lat = $(element).data("lat")
     lon = $(element).data("lon")
-    window.addMarker(lat, lon) if isFinite(lat) && isFinite(lon)
+    isNum = (n) -> typeof n is 'number' and isFinite n
+    window.addMarker(lat, lon) if isNum(lat) && isNum(lon)
   return
 
 window.addMarker = (latitude, longitude) ->
@@ -28,6 +29,6 @@ window.addMarker = (latitude, longitude) ->
 $(document).on 'ready page:load', ->
   script = document.createElement("script")
   script.type = "text/javascript"
-  script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyDjOrbjfVvqyAucNEt1tP7rC-HfhvdyY1o&callback=initialize"
+  script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyDjOrbjfVvqyAucNEt1tP7rC-HfhvdyY1o&callback=initializeMap"
   document.body.appendChild script
   return

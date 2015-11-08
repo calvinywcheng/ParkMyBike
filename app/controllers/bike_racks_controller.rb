@@ -10,6 +10,10 @@ class BikeRacksController < ApplicationController
     @bike_racks = BikeRack.search(params[:search])
   end
 
+  def show
+    @bike_rack = BikeRack.find(params[:id])
+  end
+
   def internal
     @bike_racks = BikeRack.search(params[:search])
   end

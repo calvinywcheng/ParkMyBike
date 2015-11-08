@@ -8,19 +8,35 @@ html, body {
   padding: 0;
 }
 
+.bike-rack-row {
+  cursor: pointer;
+}
+
 div#bike-table-column {
   position:fixed;
+  height: calc(100vh - 100px);
   left: 0px;
   top: 75px;
 }
 
 #bike-table {
-  height: calc(100vh - 100px);
   overflow: scroll;
+  opacity: 0.8;
+  background: #ccc;
+}
+
+#bike-rack-info {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
   opacity: 0.8;
   background: #ccc;
 }
 
 #map {
   height: 100%;
+}
+
+#map .gm-style-mtc {
+  display: none;
 }
