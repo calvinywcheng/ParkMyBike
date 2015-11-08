@@ -2,6 +2,13 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
+window.loadGoogleMaps = ->
+  script = document.createElement("script")
+  script.type = "text/javascript"
+  script.src = "http://maps.googleapis.com/maps/api/js?key=AIzaSyDjOrbjfVvqyAucNEt1tP7rC-HfhvdyY1o&callback=googleMapsLoaded"
+  document.body.appendChild script
+  return
+
 window.googleMapsLoaded = ->
   renderMainMap()
   renderStreetView()
@@ -43,16 +50,15 @@ window.addCurrentLocation = ->
       icon:
         url: "/assets/my_location.png"
         scaledSize: new google.maps.Size(25, 25))
-  if navigator.geolocation
-    navigator.geolocation.getCurrentPosition(placeMarker)
+  navigator.geolocation.getCurrentPosition(placeMarker) if navigator.geolocation
   return
 
 window.renderStreetView = ->
   element = $("#street-view")[0]
+  $(element).height($(element).width() * 9/16);
   lat = $(element).data("lat")
   lon = $(element).data("lon")
   if isValidLatLon(lat, lon)
-    console.log "lat lon valid"
     window.streetView = new google.maps.StreetViewPanorama(
       element,
       position: new google.maps.LatLng(lat, lon)
@@ -64,15 +70,18 @@ window.renderStreetView = ->
 window.isValidLatLon = (lat, lon) ->
   isNum = (n) ->
     return typeof n is 'number' && isFinite n
-  isNum(lat) && isNum(lon)
+  return isNum(lat) && isNum(lon)
 
-$(document).on 'ready page:load', ->
-  script = document.createElement("script")
-  script.type = "text/javascript"
-  script.src = "http://maps.googleapis.com/maps/api/js?key=AIzaSyDjOrbjfVvqyAucNEt1tP7rC-HfhvdyY1o&callback=googleMapsLoaded"
-  document.body.appendChild script
+window.makeBikeRackPanelTranslucent = ->
+  panelBody = $("#bike-rack-detailed-info").parent().parent()[0]
+  bgStr = $(panelBody).css("background-color")
+  bg = bgStr.substring(4, bgStr.length-1).split(", ")
+  newBg = "rgba(" + bg[0] + ", " + bg[1] + ", " + bg[2] + ", " + 0.6 + ")"
+  $(panelBody).css("background-color", newBg)
+  console.log bgStr + " " + newBg + " " + $(panelBody).css("background-color")
   return
 
 $(document).on 'ready page:load', ->
-  streetViewElem = $("#street-view")[0]
-  $(streetViewElem).height($(streetViewElem).width() * 9/16);
+  loadGoogleMaps()
+  makeBikeRackPanelTranslucent()
+  return
