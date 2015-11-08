@@ -11,7 +11,7 @@ window.initializeMap = ->
   return
 
 window.addMarkers = ->
-  $(".bike-rack-row").each (index, element) =>
+  $(".map-marker").each (index, element) =>
     lat = $(element).data("lat")
     lon = $(element).data("lon")
     isNum = (n) -> typeof n is 'number' and isFinite n
