@@ -65,7 +65,6 @@ window.addCurrentLocation = ->
       map: map
       icon:
         url: "<%= asset_path 'my_location.png' %>")
-    bounds.extend marker.position
     marker.addListener('click', ->
       map.setZoom(if map.getZoom() > 16 then map.getZoom() else 16)
       map.panTo marker.position)

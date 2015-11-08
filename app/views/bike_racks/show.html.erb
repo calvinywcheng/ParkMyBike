@@ -3,7 +3,8 @@
     <%= render 'search_box' %>
     <div class="panel panel-primary map-marker" id="bike-rack-info"
          data-lat="<%= @bike_rack.latitude %>"
-         data-lon="<%= @bike_rack.longitude %>">
+         data-lon="<%= @bike_rack.longitude %>"
+         data-url="<%= bike_rack_path(@bike_rack) %>">
         <div class="panel-heading">
             <h1 class="panel-title">
                 <a href="javascript:history.back()">
