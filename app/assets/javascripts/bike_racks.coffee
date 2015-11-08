@@ -11,24 +11,24 @@ window.initializeMap = ->
   return
 
 window.addMarkers = ->
+  window.bounds = new google.maps.LatLngBounds()
   $(".map-marker").each (index, element) =>
     lat = $(element).data("lat")
     lon = $(element).data("lon")
-    isNum = (n) -> typeof n is 'number' and isFinite n
-    window.addMarker(lat, lon) if isNum(lat) && isNum(lon)
+    isNum = (n) -> typeof n is 'number' && isFinite n
+    marker = window.addMarker(lat, lon) if isNum(lat) && isNum(lon)
+  window.map.fitBounds(bounds)
   return
 
 window.addMarker = (latitude, longitude) ->
-  marker = new google.maps.Marker(
-    position:
-      lat: latitude
-      lng: longitude
-    map: window.map)
+  latlon = new google.maps.LatLng(latitude, longitude)
+  marker = new google.maps.Marker(position: latlon, map: window.map)
+  window.bounds.extend latlon
   return
 
 $(document).on 'ready page:load', ->
   script = document.createElement("script")
   script.type = "text/javascript"
-  script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyDjOrbjfVvqyAucNEt1tP7rC-HfhvdyY1o&callback=initializeMap"
+  script.src = "http://maps.googleapis.com/maps/api/js?key=AIzaSyDjOrbjfVvqyAucNEt1tP7rC-HfhvdyY1o&callback=initializeMap"
   document.body.appendChild script
   return
