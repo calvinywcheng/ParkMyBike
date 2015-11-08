@@ -17,7 +17,7 @@ window.addMarkers = ->
     lon = $(element).data("lon")
     isNum = (n) -> typeof n is 'number' && isFinite n
     marker = window.addMarker(lat, lon) if isNum(lat) && isNum(lon)
-  window.map.fitBounds(bounds)
+  window.map.fitBounds(window.bounds) unless window.bounds.isEmpty()
   return
 
 window.addMarker = (latitude, longitude) ->
