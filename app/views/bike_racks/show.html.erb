@@ -5,7 +5,11 @@
          data-lat="<%= @bike_rack.latitude %>"
          data-lon="<%= @bike_rack.longitude %>">
         <div class="panel-heading">
-            <h1 class="panel-title">Bike Rack Information</h1>
+            <h1 class="panel-title">
+                <a href="javascript:history.back()">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+                Bike Rack Information</h1>
         </div>
         <div class="panel-body">
             <div id="street-view"
