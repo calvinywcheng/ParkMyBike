@@ -9,7 +9,8 @@ window.initializeMap = ->
     maxZoom: 18
     center: VANCOUVER_CENTRE
   window.map = new google.maps.Map(document.getElementById("map"), mapOptions)
-  window.addMarkers()
+  addCurrentLocation()
+  addMarkers()
   return
 
 window.addMarkers = ->
@@ -26,6 +27,21 @@ window.addMarker = (latitude, longitude, bounds) ->
   latlon = new google.maps.LatLng(latitude, longitude)
   marker = new google.maps.Marker(position: latlon, map: map)
   bounds.extend latlon
+  return
+
+window.addCurrentLocation = ->
+  placeMarker = (position) ->
+    marker = new google.maps.Marker(
+      position:
+        lat: position.coords.latitude
+        lng: position.coords.longitude
+      map: map
+      icon:
+        url: "media/my_location.png"
+        scaledSize: new google.maps.Size(25, 25))
+    bounds.extend marker.position
+  if navigator.geolocation
+    navigator.geolocation.getCurrentPosition(placeMarker)
   return
 
 $(document).on 'ready page:load', ->
