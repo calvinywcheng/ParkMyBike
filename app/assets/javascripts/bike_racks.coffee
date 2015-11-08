@@ -6,6 +6,7 @@ window.loadGoogleMaps = ->
   script = document.createElement("script")
   script.type = "text/javascript"
   script.src = "http://maps.googleapis.com/maps/api/js?key=AIzaSyDjOrbjfVvqyAucNEt1tP7rC-HfhvdyY1o&callback=googleMapsLoaded"
+  script.async = true
   document.body.appendChild script
   return
 
@@ -18,12 +19,18 @@ window.renderMainMap = ->
   VANCOUVER_CENTRE = new google.maps.LatLng(49.234424, -123.1023147)
   mapOptions =
     zoom: 12
+    minZoom: 11
     maxZoom: 19
     center: VANCOUVER_CENTRE
+    panControl:true,
+    zoomControl:true,
+    mapTypeControl:true,
+    scaleControl:true,
+    streetViewControl:true,
+    overviewMapControl:true,
+    rotateControl:true
     mapTypeControlOptions:
       position: google.maps.ControlPosition.TOP_RIGHT
-    scaleControl: true
-    rotateControl: true
   window.map = new google.maps.Map($("#map")[0], mapOptions)
   window.bounds = new google.maps.LatLngBounds()
   addCurrentLocation()
@@ -45,28 +52,30 @@ window.addMarker = (latitude, longitude, url) ->
       lat: latitude
       lng: longitude
     map: map)
-  google.maps.event.addListener(marker, 'click', -> window.location.href = url)
+  marker.addListener('click', -> window.location.href = url)
   bounds.extend marker.position
   return
 
 window.addCurrentLocation = ->
-  if navigator.geolocation
-    navigator.geolocation.getCurrentPosition((position) ->
-      marker = new google.maps.Marker(
-        position:
-          lat: position.coords.latitude
-          lng: position.coords.longitude
-        map: map
-        icon:
-          url: "/assets/my_location.png")
-      bounds.extend marker.position
-      google.maps.event.addListener(marker, 'click', -> map.fitBounds(bounds))
-      return)
+  placeMarker = (position) ->
+    marker = new google.maps.Marker(
+      position:
+        lat: position.coords.latitude
+        lng: position.coords.longitude
+      map: map
+      icon:
+        url: "/assets/my_location.png")
+    bounds.extend marker.position
+    map.panTo marker.position
+    marker.addListener('click', ->
+      map.setZoom(if map.getZoom() > 16 then map.getZoom() else 16)
+      map.panTo marker.position)
+  navigator.geolocation.getCurrentPosition(placeMarker) if navigator.geolocation
   return
 
 window.renderStreetView = ->
   element = $("#street-view")[0]
-  $(element).height($(element).width() * 9/16);
+  $(element).height($(element).width() * 9 / 16);
   lat = $(element).data("lat")
   lon = $(element).data("lon")
   if isValidLatLon(lat, lon)
@@ -86,7 +95,7 @@ window.isValidLatLon = (lat, lon) ->
 window.makeBikeRackPanelTranslucent = ->
   panelBody = $("#bike-rack-detailed-info").parent().parent()[0]
   bgStr = $(panelBody).css("background-color")
-  bg = bgStr.substring(4, bgStr.length-1).split(", ")
+  bg = bgStr.substring(4, bgStr.length - 1).split(", ")
   newBg = "rgba(" + bg[0] + ", " + bg[1] + ", " + bg[2] + ", " + 0.6 + ")"
   $(panelBody).css("background-color", newBg)
   console.log bgStr + " " + newBg + " " + $(panelBody).css("background-color")
