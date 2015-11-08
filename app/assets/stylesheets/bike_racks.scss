@@ -34,6 +34,8 @@ div#bike-table-column * {
 #bike-rack-info {
   opacity: 0.8;
   background: #ccc;
+  max-height: 100%;
+  overflow-y: auto;
 }
 
 table#bike-rack-detailed-info tr td:first-child {
