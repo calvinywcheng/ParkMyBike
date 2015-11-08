@@ -3,28 +3,29 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 window.initializeMap = ->
-  VANCOUVER_CENTRE = new google.maps.LatLng(49.2571858, -123.1349002)
+  VANCOUVER_CENTRE = new google.maps.LatLng(49.234424, -123.1023147)
   mapOptions =
-    zoom: 13
+    zoom: 12
+    maxZoom: 18
     center: VANCOUVER_CENTRE
   window.map = new google.maps.Map(document.getElementById("map"), mapOptions)
   window.addMarkers()
   return
 
 window.addMarkers = ->
-  window.bounds = new google.maps.LatLngBounds()
+  bounds = new google.maps.LatLngBounds()
   $(".map-marker").each (index, element) =>
     lat = $(element).data("lat")
     lon = $(element).data("lon")
     isNum = (n) -> typeof n is 'number' && isFinite n
-    marker = window.addMarker(lat, lon) if isNum(lat) && isNum(lon)
-  window.map.fitBounds(window.bounds) unless window.bounds.isEmpty()
+    window.addMarker(lat, lon, bounds) if isNum(lat) && isNum(lon)
+  map.fitBounds(bounds) unless bounds.isEmpty()
   return
 
-window.addMarker = (latitude, longitude) ->
+window.addMarker = (latitude, longitude, bounds) ->
   latlon = new google.maps.LatLng(latitude, longitude)
-  marker = new google.maps.Marker(position: latlon, map: window.map)
-  window.bounds.extend latlon
+  marker = new google.maps.Marker(position: latlon, map: map)
+  bounds.extend latlon
   return
 
 $(document).on 'ready page:load', ->
