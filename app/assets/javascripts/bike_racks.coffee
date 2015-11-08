@@ -34,14 +34,19 @@ window.addMarkers = ->
   $(".map-marker").each (index, element) =>
     lat = $(element).data("lat")
     lon = $(element).data("lon")
-    window.addMarker(lat, lon, bounds) if isValidLatLon(lat, lon)
+    url = $(element).data("url")
+    window.addMarker(lat, lon, url, bounds) if isValidLatLon(lat, lon)
   map.fitBounds(bounds) unless bounds.isEmpty()
   return
 
-window.addMarker = (latitude, longitude, bounds) ->
-  latlon = new google.maps.LatLng(latitude, longitude)
-  marker = new google.maps.Marker(position: latlon, map: map)
-  bounds.extend latlon
+window.addMarker = (latitude, longitude, url, bounds) ->
+  marker = new google.maps.Marker(
+    position:
+      lat: latitude
+      lng: longitude
+    map: map)
+  bounds.extend marker.position
+  google.maps.event.addListener(marker, 'click', -> window.location.href = url)
   return
 
 window.addCurrentLocation = ->

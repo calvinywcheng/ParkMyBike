@@ -1,7 +1,8 @@
 <tr class="bike-rack-row map-marker"
     onclick="location.href='<%= bike_rack_path(bike_rack) %>'"
     data-lat="<%= bike_rack.latitude %>"
-    data-lon="<%= bike_rack.longitude %>">
+    data-lon="<%= bike_rack.longitude %>"
+    data-url="<%= bike_rack_path(bike_rack) %>">
   <td><%= bike_rack.street_number %> <%= bike_rack.street_name %></td>
   <td><%= bike_rack.number_of_racks %> bike rack(s)</td>
 </tr>
