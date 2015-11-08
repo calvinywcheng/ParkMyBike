@@ -17,6 +17,11 @@ div#bike-table-column {
   height: calc(100vh - 100px);
   left: 0px;
   top: 75px;
+  pointer-events: none;
+}
+
+div#bike-table-column * {
+  pointer-events: all;
 }
 
 #bike-table {

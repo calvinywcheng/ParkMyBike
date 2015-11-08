@@ -4,7 +4,7 @@ class BikeRack < ActiveRecord::Base
     if search
       where('street_name LIKE ?', "%#{search}%")
     else
-      all
+      none
     end
   end
 
