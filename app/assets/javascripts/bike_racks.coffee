@@ -20,6 +20,10 @@ window.renderMainMap = ->
     zoom: 12
     maxZoom: 18
     center: VANCOUVER_CENTRE
+    mapTypeControlOptions:
+      position: google.maps.ControlPosition.TOP_RIGHT
+    scaleControl: true
+    rotateControl: true
   window.map = new google.maps.Map($("#map")[0], mapOptions)
   addCurrentLocation()
   addMarkers()
