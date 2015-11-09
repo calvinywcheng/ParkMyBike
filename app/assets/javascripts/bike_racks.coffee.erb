@@ -22,13 +22,13 @@ window.renderMainMap = ->
     minZoom: 11
     maxZoom: 19
     center: VANCOUVER_CENTRE
-    panControl:true,
-    zoomControl:true,
-    mapTypeControl:true,
-    scaleControl:true,
-    streetViewControl:true,
-    overviewMapControl:true,
-    rotateControl:true
+    panControl: true,
+    zoomControl: true,
+    mapTypeControl: true,
+    scaleControl: true,
+    streetViewControl: true,
+    overviewMapControl: true,
+    rotateControl: true
     mapTypeControlOptions:
       position: google.maps.ControlPosition.TOP_RIGHT
   window.map = new google.maps.Map($("#map")[0], mapOptions)
@@ -77,12 +77,12 @@ window.renderStreetView = ->
   lat = $(element).data("lat")
   lon = $(element).data("lon")
   if isValidLatLon(lat, lon)
-    window.streetView = new google.maps.StreetViewPanorama(
-      element,
+    streetViewOptions =
       position: new google.maps.LatLng(lat, lon)
       addressControl: true
       clickToGo: true
-      enableCloseButton: false)
+      enableCloseButton: false
+    window.streetView = new google.maps.StreetViewPanorama(element, streetViewOptions)
   return
 
 window.isValidLatLon = (lat, lon) ->
@@ -102,4 +102,15 @@ window.makeBikeRackPanelTranslucent = ->
 $(document).ready ->
   loadGoogleMaps() if $("#map")[0]? || $("street-view")[0]?
   makeBikeRackPanelTranslucent() if $("#bike-rack-detailed-info")[0]?
+  return
+
+$(document).on 'click', '.panel-heading span.clickable', (e) ->
+  if $(this).hasClass('panel-collapsed')
+    $(this).parents('.panel').find('.panel-body').slideDown()
+    $(this).removeClass 'panel-collapsed'
+    $(this).removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up')
+  else
+    $(this).parents('.panel').find('.panel-body').slideUp()
+    $(this).addClass 'panel-collapsed'
+    $(this).removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down')
   return
