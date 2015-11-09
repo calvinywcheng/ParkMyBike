@@ -15,7 +15,7 @@ class BikeRacksController < ApplicationController
   end
 
   def internal
-    @bike_racks = BikeRack.search(params[:search])
+    @bike_racks = BikeRack.all
   end
 
   def full_update

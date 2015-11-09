@@ -127,6 +127,7 @@ section#about {
 .alert {
   position: absolute;
   width: 100%;
+  z-index: 99999999;
 }
 
 hr#fade {
