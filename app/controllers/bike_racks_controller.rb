@@ -4,7 +4,7 @@ require 'csv'
 
 class BikeRacksController < ApplicationController
 
-  DEFAULT_BIKE_RACK_URI = 'ftp://webftp.vancouver.ca/opendata/bike_rack/BikeRackData.csv'
+  DEFAULT_URI = 'ftp://webftp.vancouver.ca/opendata/bike_rack/BikeRackData.csv'
 
   def index
     @bike_racks = BikeRack.search(params[:search])
@@ -20,7 +20,7 @@ class BikeRacksController < ApplicationController
 
   def update_all
     begin
-      @remote_url = params[:remote_url]
+      @remote_url = params[:remote_url].blank? ? DEFAULT_URI : params[:remote_url]
       update_bike_racks @remote_url
     rescue StandardError => e
       handle_full_update_error e
