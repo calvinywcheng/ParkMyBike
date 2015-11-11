@@ -4,15 +4,15 @@ Rails.application.routes.draw do
 
   resources :bike_racks, only: [:index, :show]
 
-  root 'welcome#index'
+  root 'root#index'
 
   get 'users/new'
 
   post 'users/new' => 'users#create'
 
-  get 'welcome/index'
+  get 'root/index'
 
-  get '/team' => "welcome#team"
+  get '/team' => "root#team"
 
   get '/internal' => "bike_racks#internal"
 
