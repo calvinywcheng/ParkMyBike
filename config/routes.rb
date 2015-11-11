@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  get 'bike_racks/full_update' => 'bike_racks#full_update', as: :full_update
+  patch 'bike_racks' => 'bike_racks#update_all'
 
   resources :bike_racks, only: [:index, :show]
 

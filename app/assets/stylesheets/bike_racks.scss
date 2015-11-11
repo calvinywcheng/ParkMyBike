@@ -19,8 +19,8 @@ div#bike-table-column {
   pointer-events: none;
 }
 
-div#internal-bike-table-colummn {
-  height: 80vh;
+div#internal-bike-table-column {
+  height: calc(100vh - 120px);
 }
 
 div#bike-table-column * {
