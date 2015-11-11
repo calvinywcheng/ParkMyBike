@@ -1,25 +1,37 @@
 <header>
   <div class="navbar navbar-fixed-top navbar-inverse">
-    <div class="navbar-inner">
-      <a class="navbar-brand" href="/">
-        <img class="logo logo_default " src="/media/logowhite.png">
-        <img class="logo logo_hover" src="/media/logoblue.png">
-      </a>
-      <ul class="nav navbar-nav navbar-left">
-        <li><%= link_to "Home", href="/" %></li>
-        <li><%= link_to "Our Team", href="/team" %></li>
-        <li><%= link_to "Bike Racks", bike_racks_path %></li>
-        <li><%= link_to "Manage Data", internal_path %></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <% if logged_in? %>
-          <li><%= link_to "Welcome, #{logged_in?}", href="/sessions/profile"%></li>
-          <li><%= link_to "Log Out", href="/sessions/logout"%></li>
-        <% else %>
-          <li><%= link_to "Log In", href="/sessions/login"%></li>
-          <li><%= link_to "Create Account", href="/users/new"%></li>
-        <% end %>
-      </ul>
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle navbar-btn collapsed btn-lg"
+                data-toggle="collapse"
+                data-target=".navbar-collapse"
+                aria-expanded="false">
+          <span class="glyphicon glyphicon-menu-hamburger"
+                style="color: white"></span>
+        </button>
+        <a class="navbar-brand" href="/">
+          <img class="logo logo_default " src="/media/logowhite.png">
+          <img class="logo logo_hover" src="/media/logoblue.png">
+        </a>
+      </div>
+
+      <div class="collapse navbar-collapse navbar-inner">
+        <ul class="nav navbar-nav navbar-left">
+          <li><%= link_to "Home", href="/" %></li>
+          <li><%= link_to "Our Team", href="/team" %></li>
+          <li><%= link_to "Bike Racks", bike_racks_path %></li>
+          <li><%= link_to "Manage Data", internal_path %></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <% if logged_in? %>
+            <li><%= link_to "Welcome, #{logged_in?}", href="/sessions/profile" %></li>
+            <li><%= link_to "Log Out", href="/sessions/logout" %></li>
+          <% else %>
+            <li><%= link_to "Log In", href="/sessions/login" %></li>
+            <li><%= link_to "Create Account", href="/users/new" %></li>
+          <% end %>
+        </ul>
+      </div>
     </div>
   </div>
 </header>

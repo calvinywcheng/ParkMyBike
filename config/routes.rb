@@ -4,15 +4,15 @@ Rails.application.routes.draw do
 
   resources :bike_racks, only: [:index, :show]
 
-  root 'root#index'
+  root 'welcome#index'
 
   get 'users/new'
 
   post 'users/new' => 'users#create'
 
-  get 'root/index'
+  get 'welcome/index'
 
-  get '/team' => "root#team"
+  get '/team' => "welcome#team"
 
   get '/internal' => "bike_racks#internal"
 
@@ -33,7 +33,7 @@ end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
-  # You can have the root of your site routed with "root"
+  # You can have the welcome of your site routed with "welcome"
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
