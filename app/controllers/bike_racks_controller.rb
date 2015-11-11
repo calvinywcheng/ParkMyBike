@@ -40,11 +40,16 @@ class BikeRacksController < ApplicationController
   end
 
   def store_one_bike_rack (data)
-    @bike_rack = BikeRack.new(
-      street_number: data['St Number'].strip,
-      street_name: data['St Name'].strip,
-      street_side: data['Street Side'].strip,
-      number_of_racks: data['# of racks'])
+    begin
+      @bike_rack = BikeRack.new(
+          street_number: data['St Number'].strip,
+          street_name: data['St Name'].strip,
+          street_side: data['Street Side'].strip,
+          number_of_racks: data['# of racks'])
+    rescue StandardError => e
+      handle_format_error(e, data)
+      return false
+    end
 
     handle_validation_error(@bike_rack) unless @bike_rack.valid?
     @bike_rack.save
@@ -56,10 +61,17 @@ class BikeRacksController < ApplicationController
     logger.error "Error fetching data: #{e}"
   end
 
+  def handle_format_error (err, data)
+    logger.error err
+    logger.error 'CSV data format invalid:'
+    logger.error "Read #{data.to_s}"
+    logger.error 'Expected keys [\'St Number\', \'St Name\', \'Street Side\', \'# of racks\']'
+  end
+
   def handle_validation_error (bike_rack)
     logger.warn 'Model validation error: ' +
-                "#{bike_rack.street_number} #{@bike_rack.street_name}: " +
-                bike_rack.errors.full_messages.first
+                    "#{bike_rack.street_number} #{@bike_rack.street_name}: " +
+                    bike_rack.errors.full_messages.first
   end
 
   def handle_finished_parsing (counter)
@@ -72,6 +84,7 @@ class BikeRacksController < ApplicationController
     end
     logger.info "#{counter[:valid]} bike rack(s) parsed successfully."
     logger.info "#{counter[:invalid]} model validation error(s) found."
+    counter
   end
 
 end
