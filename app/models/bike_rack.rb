@@ -1,11 +1,18 @@
 class BikeRack < ActiveRecord::Base
 
+  geocoded_by :address
+  before_save :geocode
+
   def self.search(search)
     if search
       where('street_name LIKE ?', "%#{search}%")
     else
       none
     end
+  end
+
+  def address
+    [@street_number, @street_name, "Vancouver BC, Canada"].compact.join(', ')
   end
 
   DIRECTIONS = %w(North West East South)
@@ -25,4 +32,6 @@ class BikeRack < ActiveRecord::Base
   validates :number_of_racks,
             presence: true,
             numericality: { greater_than_or_equal_to: 1 }
+
+
 end
