@@ -13,11 +13,14 @@ html, body {
 }
 
 div#bike-table-column {
-  position:fixed;
+  position: fixed;
   height: calc(100vh - 100px);
-  left: 0px;
   top: 75px;
   pointer-events: none;
+}
+
+div#internal-bike-table-column {
+  height: calc(100vh - 120px);
 }
 
 div#bike-table-column * {
@@ -26,7 +29,7 @@ div#bike-table-column * {
 
 #bike-table {
   height: 100%;
-  overflow: scroll;
+  overflow-y: auto;
   opacity: 0.8;
   background: #ccc;
 }

@@ -114,3 +114,6 @@ $(document).on 'click', '.panel-heading span.clickable', (e) ->
     $(this).addClass 'panel-collapsed'
     $(this).removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down')
   return
+
+$(document).on 'click', '#edit-bike-rack-url', ->
+  $('#remote_url').prop 'readonly', (i, v) -> !v

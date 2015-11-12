@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   helper_method :logged_in?
 
   protected
-  def authenticate_user 
+  def authenticate_user
     if session[:user_id] && User.exists?(session[:user_id])
         @current_user = User.find(session[:user_id])
         return true
@@ -29,6 +29,10 @@ class ApplicationController < ActionController::Base
     session[:user_id] &&
     User.exists?(session[:user_id]) &&
     User.find(session[:user_id]).username
+  end
+
+  def is_admin?
+    logged_in?
   end
 
 end

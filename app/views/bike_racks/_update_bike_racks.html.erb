@@ -1,0 +1,18 @@
+<%= form_tag bike_racks_path, method: :patch, enforce_utf8: false do %>
+  <div class="input-group">
+      <%= text_field_tag :remote_url,
+                         'ftp://webftp.vancouver.ca/opendata/bike_rack/BikeRackData.csv',
+                         class: 'form-control',
+                         readonly: true %>
+      <span class="input-group-btn">
+          <%= button_tag type: 'button',
+                         class: 'btn btn-warning',
+                         id: 'edit-bike-rack-url' do %>
+            <span class="glyphicon glyphicon-pencil"></span>
+          <% end %>
+          <%= submit_tag 'Update',
+                         class: 'btn btn-primary',
+                         data: {disable_with: 'Please wait...'} %>
+      </span>
+  </div>
+<% end %>

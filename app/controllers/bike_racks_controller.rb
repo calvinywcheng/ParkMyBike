@@ -4,7 +4,7 @@ require 'csv'
 
 class BikeRacksController < ApplicationController
 
-  BIKE_RACK_URI = 'ftp://webftp.vancouver.ca/opendata/bike_rack/BikeRackData.csv'
+  DEFAULT_URI = 'ftp://webftp.vancouver.ca/opendata/bike_rack/BikeRackData.csv'
 
   def index
     @bike_racks = BikeRack.search(params[:search])
@@ -15,13 +15,13 @@ class BikeRacksController < ApplicationController
   end
 
   def internal
-    @bike_racks = BikeRack.search(params[:search])
+    @bike_racks = BikeRack.all
   end
 
-  def full_update
+  def update_all
     begin
-      racks_data = open BIKE_RACK_URI
-      update_bike_racks racks_data
+      @remote_url = params[:remote_url].blank? ? DEFAULT_URI : params[:remote_url]
+      update_bike_racks @remote_url
     rescue StandardError => e
       handle_full_update_error e
     end
@@ -40,26 +40,38 @@ class BikeRacksController < ApplicationController
   end
 
   def store_one_bike_rack (data)
-    @bike_rack = BikeRack.new(
-      street_number: data['St Number'].strip,
-      street_name: data['St Name'].strip,
-      street_side: data['Street Side'].strip,
-      number_of_racks: data['# of racks'])
+    begin
+      @bike_rack = BikeRack.new(
+          street_number: data['St Number'].strip,
+          street_name: data['St Name'].strip,
+          street_side: data['Street Side'].strip,
+          number_of_racks: data['# of racks'])
+    rescue StandardError => e
+      handle_format_error(e, data)
+      return false
+    end
 
     handle_validation_error(@bike_rack) unless @bike_rack.valid?
     @bike_rack.save
   end
 
   def handle_full_update_error (e)
-    flash[:alert] = "Problem opening bike rack URL: #{BIKE_RACK_URI}. " +
+    flash[:alert] = "Problem opening bike rack URL: #{@remote_url}. " +
         'Are things going okay over there?'
     logger.error "Error fetching data: #{e}"
   end
 
+  def handle_format_error (err, data)
+    logger.error err
+    logger.error 'CSV data format invalid:'
+    logger.error "Read #{data.to_s}"
+    logger.error 'Expected keys [\'St Number\', \'St Name\', \'Street Side\', \'# of racks\']'
+  end
+
   def handle_validation_error (bike_rack)
     logger.warn 'Model validation error: ' +
-                "#{bike_rack.street_number} #{@bike_rack.street_name}: " +
-                bike_rack.errors.full_messages.first
+                    "#{bike_rack.street_number} #{@bike_rack.street_name}: " +
+                    bike_rack.errors.full_messages.first
   end
 
   def handle_finished_parsing (counter)
@@ -72,6 +84,7 @@ class BikeRacksController < ApplicationController
     end
     logger.info "#{counter[:valid]} bike rack(s) parsed successfully."
     logger.info "#{counter[:invalid]} model validation error(s) found."
+    counter
   end
 
 end
