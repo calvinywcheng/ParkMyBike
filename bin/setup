@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby.exe
 require 'pathname'
 
-# path to your application root.
+# path to your application welcome.
 APP_ROOT = Pathname.new File.expand_path('../../',  __FILE__)
 
 Dir.chdir APP_ROOT do

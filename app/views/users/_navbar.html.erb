@@ -1,8 +1,0 @@
-<% if logged_in? %>
-    <li><%= link_to "Welcome, #{logged_in?}", href="/sessions/profile"%></li>
-    <li><%= link_to "Log Out", href="/sessions/logout"%></li>
-<% else %>
-    <li><%= link_to "Log In", href="/sessions/login"%></li>
-    <li><%= link_to "Create Account", href="/users/new"%></li>
-<% end %>
-

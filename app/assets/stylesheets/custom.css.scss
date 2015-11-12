@@ -1,15 +1,7 @@
-@import "bootstrap-sprockets";
-@import "bootstrap";
-
 /* universal */
 
 body {
   padding-top: 75px;
-}
-
-.navbar-inner {
-  margin-right: 89px;
-  margin-left: 55px;
 }
 
 .nav {
@@ -20,108 +12,103 @@ body {
   height: 75px;
 }
 
-body> header div div a .logo {
+.navbar-collapse {
+  background: #222222;
+}
+
+body > header div div a .logo {
   margin-bottom: 20px;
 }
 
-body> header div div a .logo_hover {
-  display: none
+body > header div div a .logo_hover {
+  display: none;
 }
 
-body> header div div a:hover .logo_default {
-  display: none
+body > header div div a:hover .logo_default {
+  display: none;
 }
 
-body> header div div a:hover .logo_hover {
-  display: block
+body > header div div a:hover .logo_hover {
+  display: block;
 }
 
 div#left-column {
-  background: #FFFFFF
+  background: #FFFFFF;
 }
 
-.team-banner {
-  display: table;
-  width: 100%;
-  height: 550px;
-  color: #ccc;
-  background: rgba(26,26,26,0.7);
-  -moz-background-size: cover;
-  background-size: cover;
-  -o-background-size: cover;
-}
-
-.banner {
-  display: table;
-  width: 100%;
-  height: 550px;
-  color: #ccc;
-  background: rgba(26,26,26,0.8);
-  -moz-background-size: cover;
-  background-size: cover;
-  -o-background-size: cover;
-}
-
-.text-vertical-center {
-  display: table-cell;
-  text-align: center;
-  vertical-align: middle;
-  color: #000000;
-}
-
-div#about-text {
-  display: table-cell;
-  text-align: center;
-  vertical-align: middle;
-  color: #ccc;
-}
-
-body#front-body {
-  background: url(/media/bikerack.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-section#team-intro {
-  background: url(/media/tortoise.jpg) no-repeat center center;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-section#team {
-  background: rgba(26,26,26,0.5);
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-section#services {
-  background: rgba(26,26,26,1);
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-section#about {
+.jumbotron {
   margin-top: 70px;
-  margin-left: 210px;
   margin-bottom: 70px;
-  margin-right: 210px;
-  border-top:8px solid #00ffff;
+  border-top: 8px solid #00ffff;
+  display: table;
+  width: 100%;
+  height: 40vh;
+  color: #ccc;
+  background: rgba(26, 26, 26, 0.7) !important;
+}
+
+.container.team-banner {
+  display: table;
+  height: 60%;
+  color: #CCCCCC;
+  background: rgba(26, 26, 26, 0.6);
+}
+
+.container.headshots {
+  background: #222222;
+  height: 40%;
+}
+
+.banner-text {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  color: #ccc;
+}
+
+.bg-home {
+  background: url(/media/bikerack.jpg) no-repeat center center fixed;
+  height: 100%;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
 }
 
-.text-center {
-    color: #ccc;
+.bg-team {
+  background: url(/media/tortoise.jpg) no-repeat center center fixed;
+  height: 100%;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.bg-team > #bg-layer {
+  background: rgba(26, 26, 26, 0.6);
+  height: 100%;
+  width: 100%;
+}
+
+.content-bg {
+  background: #222222;
+  color: #CCCCCC;
+}
+
+.headshot {
+  margin: auto;
+  border: 1px solid #CCCCCC;
+}
+
+.bottom-content {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.logo {
+  height: 40px;
+  width: 40px;
 }
 
 .alert {
@@ -130,7 +117,7 @@ section#about {
   z-index: 99999999;
 }
 
-hr#fade {
+hr.gradient {
   border: 0;
   height: 1px;
   background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0));
