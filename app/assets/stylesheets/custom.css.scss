@@ -12,76 +12,86 @@ body {
   height: 75px;
 }
 
+.navbar-collapse {
+  background: #222222;
+}
+
 body > header div div a .logo {
   margin-bottom: 20px;
 }
 
 body > header div div a .logo_hover {
-  display: none
+  display: none;
 }
 
 body > header div div a:hover .logo_default {
-  display: none
+  display: none;
 }
 
 body > header div div a:hover .logo_hover {
-  display: block
+  display: block;
 }
 
 div#left-column {
-  background: #FFFFFF
-}
-
-.team-banner {
-  display: table;
-  width: 100%;
-  height: 550px;
-  color: #ccc;
-  background: rgba(26, 26, 26, 0.7);
-  -moz-background-size: cover;
-  background-size: cover;
-  -o-background-size: cover;
+  background: #FFFFFF;
 }
 
 .banner {
+  margin-top: 70px;
+  margin-bottom: 70px;
+  border-top: 8px solid #00ffff;
   display: table;
   width: 100%;
-  height: 550px;
+  height: 40vh;
   color: #ccc;
-  background: rgba(26, 26, 26, 0.8);
-  -moz-background-size: cover;
-  background-size: cover;
-  -o-background-size: cover;
+  background: rgba(26, 26, 26, 0.7);
 }
 
-.text-vertical-center {
+.container.team-banner {
+  display: table;
+  height: 60%;
+  color: #CCCCCC;
+  background: rgba(26, 26, 26, 0.7);
+}
+
+.container.headshots {
+  background: #222222;
+  height: 40%;
+}
+
+.banner-text {
   display: table-cell;
   text-align: center;
   vertical-align: middle;
-  color: #000000;
-}
-
-div#about-text {
-  display: table-cell;
-  text-align: center;
-  vertical-align: middle;
   color: #ccc;
 }
 
-body#front-body {
+.bg-home {
   background: url(/media/bikerack.jpg) no-repeat center center fixed;
+  height: 100%;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
 }
 
-section#team-intro {
-  background: url(/media/tortoise.jpg) no-repeat center center;
+.bg-team {
+  background: url(/media/tortoise.jpg) no-repeat center center fixed;
+  height: 100%;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+}
+
+.full-height {
+  height: 100%;
+}
+
+.bg-team > #bg-layer {
+  background: rgba(26, 26, 26, 0.7);
+  height: 100%;
+  width: 100%;
 }
 
 section#team {
@@ -92,28 +102,20 @@ section#team {
   background-size: cover;
 }
 
-section#services {
-  background: rgba(26, 26, 26, 1);
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+.content-bg {
+  background: #222222;
+  color: #CCCCCC;
 }
 
-section#about {
-  margin-top: 70px;
-  margin-left: 210px;
-  margin-bottom: 70px;
-  margin-right: 210px;
-  border-top: 8px solid #00ffff;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+.headshot {
+  margin: auto;
+  border: 1px solid #CCCCCC;
 }
 
-.text-center {
-  color: #ccc;
+.bottom-content {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
 
 .logo {
@@ -127,7 +129,7 @@ section#about {
   z-index: 99999999;
 }
 
-hr#fade {
+hr.gradient {
   border: 0;
   height: 1px;
   background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0));
