@@ -12,7 +12,7 @@ class BikeRack < ActiveRecord::Base
   end
 
   def address
-    [@street_number, @street_name, "Vancouver BC, Canada"].compact.join(', ')
+    [street_number, street_name, "Vancouver BC, Canada"].compact.join(', ')
   end
 
   DIRECTIONS = %w(North West East South)
