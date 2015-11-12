@@ -44,14 +44,14 @@ div#left-column {
   width: 100%;
   height: 40vh;
   color: #ccc;
-  background: rgba(26, 26, 26, 0.7);
+  background: rgba(26, 26, 26, 0.6);
 }
 
 .container.team-banner {
   display: table;
   height: 60%;
   color: #CCCCCC;
-  background: rgba(26, 26, 26, 0.7);
+  background: rgba(26, 26, 26, 0.6);
 }
 
 .container.headshots {
@@ -84,22 +84,10 @@ div#left-column {
   background-size: cover;
 }
 
-.full-height {
-  height: 100%;
-}
-
 .bg-team > #bg-layer {
-  background: rgba(26, 26, 26, 0.7);
+  background: rgba(26, 26, 26, 0.6);
   height: 100%;
   width: 100%;
-}
-
-section#team {
-  background: rgba(26, 26, 26, 0.5);
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
 }
 
 .content-bg {
