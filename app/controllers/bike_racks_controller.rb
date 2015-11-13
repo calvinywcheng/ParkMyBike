@@ -19,11 +19,13 @@ class BikeRacksController < ApplicationController
   end
 
   def update_all
-    begin
-      @remote_url = params[:remote_url].blank? ? DEFAULT_URI : params[:remote_url]
-      update_bike_racks @remote_url
-    rescue StandardError => e
-      handle_full_update_error e
+    background do
+      begin
+        @remote_url = params[:remote_url].blank? ? DEFAULT_URI : params[:remote_url]
+        update_bike_racks @remote_url
+      rescue StandardError => e
+        handle_full_update_error e
+      end
     end
     redirect_to internal_path
   end
@@ -85,6 +87,13 @@ class BikeRacksController < ApplicationController
     logger.info "#{counter[:valid]} bike rack(s) parsed successfully."
     logger.info "#{counter[:invalid]} model validation error(s) found."
     counter
+  end
+
+  def background(&block)
+    Thread.new do
+      yield
+      ActiveRecord::Base.connection.close
+    end
   end
 
 end
