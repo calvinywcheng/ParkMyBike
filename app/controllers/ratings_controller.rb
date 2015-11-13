@@ -14,7 +14,7 @@ class RatingsController < ApplicationController
             unless @rating.update_score(score)
               logger.error "Rating #{@rating.id} Failed to update to #{params[:score]}"
             end
-            redirect_to :back #TODO does refresh page
+            redirect_to "bike_racks/index" # TODO: this does not work at all, maybe raty blocks it somehow
         end
 
 end

@@ -8,6 +8,7 @@
 
 <script>
   $('#<%= type %>_star').raty({
+  halfShow : true,
   readOnly: true,
   score:  <% if type == 'safety'%>
               <%= @bike_rack.avg_safety%>
@@ -43,6 +44,7 @@
               <% end %>,
         data: { score: score, bike_rack_id: <%= @bike_rack.id %>}
       });
+      location.reload();  //TODO: Force a window reload. This is really hack.
     }
   });
   </script>
