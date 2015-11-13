@@ -89,14 +89,15 @@ class BikeRacksController < ApplicationController
 
     if logged_in?
       @current_user = User.find(session[:user_id])
-      @safetyrating = SafetyRating.where(bike_rack_id: @bike_rack.id, user_id: @current_user.id).first
+      @safetyrating = @bike_rack.safety_ratings.where(user_id: @current_user.id).first
       unless @safetyrating
-        @safetyrating = SafetyRating.create(bike_rack_id: @bike_rack.id, user_id: @current_user.id, score: 0)
+        @safetyrating = @bike_rack.safety_ratings.create(user_id: @current_user.id, score: 0)
       end
 
-      @cleanlinessrating = CleanlinessRating.where(bike_rack_id: @bike_rack.id, user_id: @current_user.id).first
+      @cleanlinessrating = @bike_rack.cleanliness_ratings.where(user_id: @current_user.id).first
       unless @cleanlinessrating
-        @cleanlinessrating = CleanlinessRating.create(bike_rack_id: @bike_rack.id, user_id: @current_user.id, score: 0)
+        @cleanlinessrating = @bike_rack.cleanliness_ratings.create(user_id: @current_user.id, score: 0)
+        logger.warn "cleanlinessrating #{@cleanlinessrating.id} #{@cleanlinessrating.bike_rack_id} #{@cleanlinessrating.user_id} #{@cleanlinessrating.score}"
       end
 
     end
