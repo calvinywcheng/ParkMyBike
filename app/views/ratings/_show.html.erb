@@ -1,0 +1,49 @@
+<p>Average rating</p>
+<div id="<%= rating.type %>_star"></div>
+
+<% if logged_in? %>
+  <p>Your rating</p>
+  <div id="user_<%= rating.type %>_star"></div>
+<% end %>
+
+<script>
+  $('#<%= rating.type %>_star').raty({
+  readOnly: true,
+  score:  <% if rating.type == 'SafetyRating'%>
+              <%= @bike_rack.avg_safety%>
+          <% elsif rating.type == 'CleanlinessRating'%>
+              <%= @bike_rack.avg_cleanliness%>
+          <% end %>,
+  path: '/assets'
+  });
+</script>
+
+<% if logged_in? %>
+  <script>
+
+  $('#user_<%= rating.type %>_star').raty({
+    score: <%= rating.score %>,
+    path: '/assets',
+    click: function(score, evt) {
+      $.ajax({
+        url:
+        <% if rating.type == 'SafetyRating'%>
+              '/safety_ratings/'
+          <% elsif rating.type == 'CleanlinessRating'%>
+              '/cleanliness_ratings/'
+        <% end %>
+
+        <% unless rating.id.blank? %>
+            + <%= rating.id %>
+        <% end %>,
+        type: <% if rating.id.blank? %>
+                "POST"
+              <% else %>
+                "PATCH"
+              <% end %>,
+        data: { score: score, bike_rack_id: <%= @bike_rack.id %>}
+      });
+    }
+  });
+  </script>
+<% end %>

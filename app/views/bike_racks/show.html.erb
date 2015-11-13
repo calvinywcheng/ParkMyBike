@@ -38,71 +38,16 @@
                         </tr>
                         <tr>
                             <td>Safety Rating</td>
-                            <td><p>Average rating</p>
-                            <div id="safety_star"></div>
-
-                              <% if logged_in? %>
-                                <p>Your rating</p>
-                                <div id="user_safety_star"></div>
-                              <% end %>
+                            <td>
+                              <%= render "ratings/show", :rating => @safetyrating %>
                             </td>
                         </tr>
                         <tr>
                             <td>Cleanliness Rating</td>
-                            <td><p>Average rating</p>
-                            <div id="cleanliness_star"></div>
-
-                              <% if logged_in? %>
-
-                                <p>Your rating</p>
-                                <div id="user_cleanliness_star"></div>
-                              <% end %>
+                            <td>
+                              <%= render "ratings/show", :rating => @cleanlinessrating %>
                             </td>
                         </tr>
-                        <script>
-                        $('#safety_star').raty({
-                        readOnly: true,
-                        score: <%= @bike_rack.avg_safety %>,
-                        path: '/assets'
-                        });
-
-                        $('#cleanliness_star').raty({
-                        readOnly: true,
-                        score: <%= @bike_rack.avg_cleanliness %>,
-                        path: '/assets'
-                        });
-
-                        </script>
-
-                        <% if logged_in? %>
-                          <script>
-
-                          $('#user_safety_star').raty({
-                            score: <%= @safetyrating.score %>,
-                            path: '/assets',
-                            click: function(score, evt) {
-                              $.ajax({
-                                url: '/safety_ratings/' + <%= @safetyrating.id %>,
-                                type: 'PATCH',
-                                data: { score: score }
-                              });
-                            }
-                          });
-
-                          $('#user_cleanliness_star').raty({
-                            score: <%= @cleanlinessrating.score %>,
-                            path: '/assets',
-                            click: function(score, evt) {
-                              $.ajax({
-                                url: '/cleanliness_ratings/' + <%= @cleanlinessrating.id %>,
-                                type: 'PATCH',
-                                data: { score: score }
-                              });
-                            }
-                          });
-                          </script>
-
-                        <% end %>
                     </table>
                 </div>
             </div>

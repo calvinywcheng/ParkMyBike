@@ -26,9 +26,8 @@ Rails.application.routes.draw do
 
   get 'sessions/profile'
 
-  resources :ratings, only: :update
-  resources :safety_ratings, only: :update
-  resources :cleanliness_ratings, only: :update
+  resources :safety_ratings, only: [:update, :create]
+  resources :cleanliness_ratings, only: [:update, :create]
 
 end
 
