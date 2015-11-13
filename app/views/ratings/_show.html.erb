@@ -1,17 +1,17 @@
 <p>Average rating</p>
-<div id="<%= rating.type %>_star"></div>
+<div id="<%= type %>_star"></div>
 
 <% if logged_in? %>
   <p>Your rating</p>
-  <div id="user_<%= rating.type %>_star"></div>
+  <div id="user_<%= type %>_star"></div>
 <% end %>
 
 <script>
-  $('#<%= rating.type %>_star').raty({
+  $('#<%= type %>_star').raty({
   readOnly: true,
-  score:  <% if rating.type == 'SafetyRating'%>
+  score:  <% if type == 'safety'%>
               <%= @bike_rack.avg_safety%>
-          <% elsif rating.type == 'CleanlinessRating'%>
+          <% elsif type == 'cleanliness'%>
               <%= @bike_rack.avg_cleanliness%>
           <% end %>,
   path: '/assets'
@@ -21,15 +21,15 @@
 <% if logged_in? %>
   <script>
 
-  $('#user_<%= rating.type %>_star').raty({
+  $('#user_<%= type %>_star').raty({
     score: <%= rating.score %>,
     path: '/assets',
     click: function(score, evt) {
       $.ajax({
         url:
-        <% if rating.type == 'SafetyRating'%>
+        <% if type == 'safety'%>
               '/safety_ratings/'
-          <% elsif rating.type == 'CleanlinessRating'%>
+          <% elsif type == 'cleanliness'%>
               '/cleanliness_ratings/'
         <% end %>
 

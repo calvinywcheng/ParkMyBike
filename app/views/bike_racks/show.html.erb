@@ -39,13 +39,13 @@
                         <tr>
                             <td>Safety Rating</td>
                             <td>
-                              <%= render "ratings/show", :rating => @safetyrating %>
+                              <%= render "ratings/show", :rating => @safetyrating, :type => "safety" %>
                             </td>
                         </tr>
                         <tr>
                             <td>Cleanliness Rating</td>
                             <td>
-                              <%= render "ratings/show", :rating => @cleanlinessrating %>
+                              <%= render "ratings/show", :rating => @cleanlinessrating, :type => "cleanliness" %>
                             </td>
                         </tr>
                     </table>
