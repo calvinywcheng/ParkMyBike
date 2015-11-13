@@ -38,14 +38,60 @@
                         </tr>
                         <tr>
                             <td>Safety Rating</td>
-                            <td>Average rating: ??? (out of ???)<br>
-                                Your rating: ??? (out of ???)</td>
+                            <td><p>Averate rating</p>
+                            <div id="safety_star"></div>
+
+                            <p>Your rating</p>
+                            <div id="user_safety_star"></div></td>
                         </tr>
                         <tr>
                             <td>Cleanliness Rating</td>
-                            <td>Average rating: ??? (out of ???)<br>
-                                Your rating: ??? (out of ???)</td>
+                            <td><p>Averate rating</p>
+                            <div id="cleanliness_star"></div>
+
+                            <p>Your rating</p>
+                            <div id="user_cleanliness_star"></div></td>
                         </tr>
+                        <script>
+                        $('#safety_star').raty({
+                        readOnly: true,
+                        score: <%= @bike_rack.avg_safety %>,
+                        path: '/assets'
+                        });
+
+                        $('#user_safety_star').raty({
+                          score: <%= @safetyrating.score %>,
+                          path: '/assets',
+                          click: function(score, evt) {
+                            $.ajax({
+                              url: '/safety_ratings/' + <%= @safetyrating.id %>,
+                              type: 'PATCH',
+                              data: { score: score }
+                            });
+                          }
+                        });
+
+                        $('#cleanliness_star').raty({
+                        readOnly: true,
+                        score: <%= @bike_rack.avg_cleanliness %>,
+                        path: '/assets'
+                        });
+
+                        $('#user_cleanliness_star').raty({
+                          score: <%= @cleanlinessrating.score %>,
+                          path: '/assets',
+                          click: function(score, evt) {
+                            $.ajax({
+                              url: '/cleanliness_ratings/' + <%= @cleanlinessrating.id %>,
+                              type: 'PATCH',
+                              data: { score: score }
+                            });
+                          }
+                        });
+
+
+                        </script>
+
                     </table>
                 </div>
             </div>

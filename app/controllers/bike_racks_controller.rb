@@ -12,6 +12,7 @@ class BikeRacksController < ApplicationController
 
   def show
     @bike_rack = BikeRack.find(params[:id])
+    show_update_rating
   end
 
   def internal
@@ -82,5 +83,23 @@ class BikeRacksController < ApplicationController
     logger.info "#{counter[:valid]} bike rack(s) parsed successfully."
     logger.info "#{counter[:invalid]} model validation error(s) found."
     counter
+  end
+
+  def show_update_rating
+
+    if logged_in?
+      @current_user = User.find(session[:user_id])
+      @safetyrating = SafetyRating.where(bike_rack_id: @bike_rack.id, user_id: @current_user.id).first
+      unless @safetyrating
+        @safetyrating = SafetyRating.create(bike_rack_id: @bike_rack.id, user_id: @current_user.id, score: 0)
+      end
+
+      @cleanlinessrating = CleanlinessRating.where(bike_rack_id: @bike_rack.id, user_id: @current_user.id).first
+      unless @cleanlinessrating
+        @cleanlinessrating = CleanlinessRating.create(bike_rack_id: @bike_rack.id, user_id: @current_user.id, score: 0)
+      end
+
+    end
+
   end
 end

@@ -1,0 +1,2 @@
+class SafetyRatingsController < RatingsController
+end
