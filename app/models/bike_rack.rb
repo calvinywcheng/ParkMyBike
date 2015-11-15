@@ -1,5 +1,8 @@
 class BikeRack < ActiveRecord::Base
 
+  has_many :cleanliness_ratings, inverse_of: :bike_rack
+  has_many :safety_ratings, inverse_of: :bike_rack
+
   geocoded_by :address
   before_save :geocode
 
@@ -13,6 +16,18 @@ class BikeRack < ActiveRecord::Base
 
   def address
     [street_number, street_name, "Vancouver BC, Canada"].compact.join(', ')
+  end
+
+  def update_safety
+    self.avg_safety = safety_ratings.sum(:score) / safety_ratings.size
+    saved = self.save
+    logger.warn "Safety_rating saved: #{saved} rating: #{self.avg_safety}"
+  end
+
+  def update_cleanliness
+    self.avg_cleanliness = cleanliness_ratings.sum(:score) / cleanliness_ratings.size
+    saved = self.save
+    logger.warn  "Cleanliness_rating saved: #{saved} rating: #{self.avg_cleanliness}"
   end
 
   DIRECTIONS = %w(North West East South)

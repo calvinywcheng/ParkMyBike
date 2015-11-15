@@ -38,13 +38,15 @@
                         </tr>
                         <tr>
                             <td>Safety Rating</td>
-                            <td>Average rating: ??? (out of ???)<br>
-                                Your rating: ??? (out of ???)</td>
+                            <td>
+                              <%= render "ratings/show", :rating => @safetyrating, :type => "safety" %>
+                            </td>
                         </tr>
                         <tr>
                             <td>Cleanliness Rating</td>
-                            <td>Average rating: ??? (out of ???)<br>
-                                Your rating: ??? (out of ???)</td>
+                            <td>
+                              <%= render "ratings/show", :rating => @cleanlinessrating, :type => "cleanliness" %>
+                            </td>
                         </tr>
                     </table>
                 </div>

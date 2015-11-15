@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
 
+  has_many :ratings, inverse_of: :user
+
   attr_accessor :password
 
   before_save :encrypt_password
