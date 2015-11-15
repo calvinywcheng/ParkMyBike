@@ -19,7 +19,7 @@ class BikeRacksController < ApplicationController
   end
 
   def update_all
-    background do
+    Thread.new do
       begin
         @remote_url = params[:remote_url].blank? ? DEFAULT_URI : params[:remote_url]
         update_bike_racks @remote_url
@@ -27,6 +27,8 @@ class BikeRacksController < ApplicationController
         handle_full_update_error e
       end
     end
+    flash[:info] = 'Updating data. This will take some time; the data will ' +
+        'be loaded into the table as it is parsed.'
     redirect_to internal_path
   end
 
@@ -77,23 +79,8 @@ class BikeRacksController < ApplicationController
   end
 
   def handle_finished_parsing (counter)
-    if counter[:invalid].zero?
-      flash[:notice] = "All #{counter[:valid]} bike rack(s) parsed successfully!"
-    else
-      flash[:info] = "#{counter[:valid]} bike rack(s) parsed successfully, and " +
-          "#{counter[:invalid]} bike rack(s) were not parsed. " +
-          'See server log for more details.'
-    end
     logger.info "#{counter[:valid]} bike rack(s) parsed successfully."
     logger.info "#{counter[:invalid]} model validation error(s) found."
     counter
   end
-
-  def background
-    Thread.new do
-      yield
-      ActiveRecord::Base.connection.close
-    end
-  end
-
 end
