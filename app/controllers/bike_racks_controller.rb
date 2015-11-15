@@ -19,12 +19,16 @@ class BikeRacksController < ApplicationController
   end
 
   def update_all
-    begin
-      @remote_url = params[:remote_url].blank? ? DEFAULT_URI : params[:remote_url]
-      update_bike_racks @remote_url
-    rescue StandardError => e
-      handle_full_update_error e
+    Thread.new do
+      begin
+        @remote_url = params[:remote_url].blank? ? DEFAULT_URI : params[:remote_url]
+        update_bike_racks @remote_url
+      rescue StandardError => e
+        handle_full_update_error e
+      end
     end
+    flash[:info] = 'Updating data. This will take some time; the data will ' +
+        'be loaded into the table as it is parsed.'
     redirect_to internal_path
   end
 
@@ -51,8 +55,7 @@ class BikeRacksController < ApplicationController
       return false
     end
 
-    handle_validation_error(@bike_rack) unless @bike_rack.valid?
-    @bike_rack.save
+    @bike_rack.save || handle_validation_error(@bike_rack)
   end
 
   def handle_full_update_error (e)
@@ -70,21 +73,14 @@ class BikeRacksController < ApplicationController
 
   def handle_validation_error (bike_rack)
     logger.warn 'Model validation error: ' +
-                    "#{bike_rack.street_number} #{@bike_rack.street_name}: " +
+                    "#{bike_rack.street_number} #{bike_rack.street_name}: " +
                     bike_rack.errors.full_messages.first
+    false
   end
 
   def handle_finished_parsing (counter)
-    if counter[:invalid].zero?
-      flash[:notice] = "All #{counter[:valid]} bike rack(s) parsed successfully!"
-    else
-      flash[:info] = "#{counter[:valid]} bike rack(s) parsed successfully, and " +
-          "#{counter[:invalid]} bike rack(s) were not parsed. " +
-          'See server log for more details.'
-    end
     logger.info "#{counter[:valid]} bike rack(s) parsed successfully."
     logger.info "#{counter[:invalid]} model validation error(s) found."
     counter
   end
-
 end

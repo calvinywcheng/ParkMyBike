@@ -24,7 +24,7 @@ class BikeRacksControllerTest < ActionController::TestCase
   test 'parse valid url' do
     assert_nothing_raised do
       counter = @controller.send(:update_bike_racks,
-                                 BikeRacksController::DEFAULT_BIKE_RACK_URI)
+                                 BikeRacksController::DEFAULT_URI)
       puts 'Results of parsing:'
       counter.each { |k, v| puts "#{k.to_s}: #{v}" }
       puts ''
