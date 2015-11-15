@@ -53,8 +53,7 @@ class BikeRacksController < ApplicationController
       return false
     end
 
-    handle_validation_error(@bike_rack) unless @bike_rack.valid?
-    @bike_rack.save
+    @bike_rack.save || handle_validation_error(@bike_rack)
   end
 
   def handle_full_update_error (e)
@@ -72,8 +71,9 @@ class BikeRacksController < ApplicationController
 
   def handle_validation_error (bike_rack)
     logger.warn 'Model validation error: ' +
-                    "#{bike_rack.street_number} #{@bike_rack.street_name}: " +
+                    "#{bike_rack.street_number} #{bike_rack.street_name}: " +
                     bike_rack.errors.full_messages.first
+    false
   end
 
   def handle_finished_parsing (counter)
@@ -89,7 +89,7 @@ class BikeRacksController < ApplicationController
     counter
   end
 
-  def background(&block)
+  def background
     Thread.new do
       yield
       ActiveRecord::Base.connection.close
