@@ -32,7 +32,7 @@ Rails.application.routes.draw do
 
 resources :authentications
   match '/auth/:provider/callback', :to => 'authentications#create', :via=> [:get]
-  match '/auth/failure', :to => 'sessions#failure', :via=> [:get]
+
 
 
 end
