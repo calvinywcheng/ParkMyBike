@@ -41,7 +41,7 @@ class SessionsController < ApplicationController
 
   def destroy
     session[:userF_id] = nil
-    redirect_to root_url
+    render "profile"
   end
 
 

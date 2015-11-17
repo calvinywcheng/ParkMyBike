@@ -4,17 +4,14 @@
   </div>
   <p class="lead">Username: <%=current_user.username%></p>
   <p class="lead">Email: <%=current_user.email%></p>
-</div>
-
-<div id="user_nav">
   <% if current_userF %>
     Signed in as <strong><%= current_userF.name %></strong>!
     <%= link_to "Sign out", signout_path, id: "sign_out" %>
   <% else %>
     <%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" %>
   <% end %>
+  <%= image_tag "facebook_64.png", :size => "64x64", :alt => "Facebook" %>
 </div>
-
 
 
 
