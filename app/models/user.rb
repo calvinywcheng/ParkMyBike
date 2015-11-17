@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
 
   has_many :ratings, inverse_of: :user
+  has_many :authentications
 
   attr_accessor :password
 

@@ -29,6 +29,12 @@ Rails.application.routes.draw do
   resources :safety_ratings, only: [:update, :create]
   resources :cleanliness_ratings, only: [:update, :create]
 
+
+resources :authentications
+  match '/auth/:provider/callback', :to => 'authentications#create', :via=> [:get]
+  match '/auth/failure', :to => 'sessions#failure', :via=> [:get]
+
+
 end
 
   # The priority is based upon order of creation: first created -> highest priority.

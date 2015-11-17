@@ -49,6 +49,7 @@ gem 'geocoder'
 # gem 'capistrano-rails', group: :development
 
 gem 'omniauth-facebook'
+gem 'nifty-generators'
 
 
 group :development, :test do
@@ -74,3 +75,5 @@ end
 group :development, :test do
   gem 'railroady'
 end
+
+gem 'mocha', group: :test

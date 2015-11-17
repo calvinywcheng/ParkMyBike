@@ -4,5 +4,12 @@
   </div>
   <p class="lead">Username: <%=@current_user.username%></p>
   <p class="lead">Email: <%=@current_user.email%></p>
+  <p><strong>Sign in with</strong>
+
+	<a href="/auth/facebook" class="auth_provider">
+  	Facebook
+  	<%= image_tag "facebook_64.png", :size => "64x64", :alt => "Facebook" %>
+ 	</a>
+  </p>
 </div>
 
