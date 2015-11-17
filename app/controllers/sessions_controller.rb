@@ -33,4 +33,16 @@ class SessionsController < ApplicationController
     redirect_to :action => 'login'
   end
 
+  def create
+    userF = UserF.from_omniauth(env["omniauth.auth"])
+    session[:userF_id] = userF.id
+    render "profile"
+  end
+
+  def destroy
+    session[:userF_id] = nil
+    redirect_to root_url
+  end
+
+
 end

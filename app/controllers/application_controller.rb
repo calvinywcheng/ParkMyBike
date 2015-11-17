@@ -35,10 +35,10 @@ class ApplicationController < ActionController::Base
     logged_in?
   end
 
-  def current_user
-    return unless session[:user_id]
-    @current_user ||= User.find(session[:user_id])
+  def current_userF
+    @current_userF ||= UserF.find(session[:userF_id]) if session[:userF_id]
   end
-  
+  helper_method :current_userF
+
 
 end

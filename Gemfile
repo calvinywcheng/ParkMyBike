@@ -50,6 +50,7 @@ gem 'geocoder'
 
 gem 'omniauth-facebook'
 gem 'nifty-generators'
+gem 'koala'
 
 
 group :development, :test do
