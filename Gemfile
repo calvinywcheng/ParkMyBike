@@ -66,3 +66,8 @@ group :production do
     gem 'thin'
     gem 'rails_serve_static_assets'
 end
+
+# Add gem for generating UML class diagram
+group :development, :test do
+  gem 'railroady'
+end
