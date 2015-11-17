@@ -5,12 +5,15 @@
   <p class="lead">Username: <%=current_user.username%></p>
   <p class="lead">Email: <%=current_user.email%></p>
   <% if current_userF %>
-    Signed in as <strong><%= current_userF.name %></strong>!
-    <%= link_to "Sign out", signout_path, id: "sign_out" %>
+    <p>Signed in as <strong><%= current_userF.name %></strong>!
+    <%= link_to "Sign out", signout_path, id: "sign_out" %></p>
+    <%= social_share_button_tag("My Home Page", :popup => "true", :url => "http://screaming-tortoises.herokuapp.com") %>
   <% else %>
     <%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" %>
+    <%= image_tag "facebook.png", :size => "16x16", :alt => "Facebook" %>
   <% end %>
-  <%= image_tag "facebook_64.png", :size => "64x64", :alt => "Facebook" %>
+  
+
 </div>
 
 

@@ -51,6 +51,7 @@ gem 'geocoder'
 gem 'omniauth-facebook'
 gem 'nifty-generators'
 gem 'koala'
+gem 'social-share-button', '~> 0.1.6'
 
 
 group :development, :test do
