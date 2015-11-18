@@ -38,7 +38,6 @@ resources :authentications
 
 match 'auth/:provider/callback', to: 'sessions#create', :via=> [:get]
 match 'signout', :to => 'sessions#destroy', :via=> [:get], as: 'signout'
-match 'share', :to => 'user_f#share', :via=> [:get], as: 'share'
 
 end
 
