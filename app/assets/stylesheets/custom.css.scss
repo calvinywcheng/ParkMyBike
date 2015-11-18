@@ -37,12 +37,12 @@ div#left-column {
 }
 
 .jumbotron {
-  margin-top: 70px;
+  margin-top: 10vh;
   margin-bottom: 70px;
   border-top: 8px solid #00ffff;
   display: table;
   width: 100%;
-  height: 40vh;
+  height: 60vh;
   color: #ccc;
   background: rgba(26, 26, 26, 0.7) !important;
 }
@@ -68,7 +68,7 @@ div#left-column {
 
 .bg-home {
   background: url(/media/bikerack.jpg) no-repeat center center fixed;
-  height: 100%;
+  height: 80vh;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -101,7 +101,6 @@ div#left-column {
 }
 
 .bottom-content {
-  position: fixed;
   bottom: 0;
   width: 100%;
 }
