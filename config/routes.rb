@@ -32,9 +32,6 @@ Rails.application.routes.draw do
   resources :cleanliness_ratings, only: [:update, :create]
 
 
-resources :authentications
- #  match '/auth/:provider/callback', :to => 'authentications#create', :via=> [:get]
- # match 'signout', :to => 'authentications#destroy', :via=> [:get]
 
 match 'auth/:provider/callback', to: 'sessions#create', :via=> [:get]
 match 'signout', :to => 'sessions#destroy', :via=> [:get], as: 'signout'
