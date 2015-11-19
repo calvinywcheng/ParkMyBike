@@ -20,5 +20,9 @@ class UserF < ActiveRecord::Base
     facebook.get_picture("me")
   end
 
+  def friends
+    facebook.get_connection("me", "friends").size
+  end
+
 end
 
