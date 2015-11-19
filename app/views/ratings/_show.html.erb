@@ -14,7 +14,6 @@
           <% elsif type == 'cleanliness'%>
               <%= @bike_rack.avg_cleanliness%>
           <% end %>,
-  path: '/assets'
   });
 </script>
 
@@ -23,7 +22,6 @@
 
   $('#user_<%= type %>_star').raty({
     score: <%= rating.score %>,
-    path: '/assets',
     click: function(score, evt) {
       $.ajax({
         url:
