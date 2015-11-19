@@ -53,15 +53,14 @@ div#left-column {
 
 .container.team-banner {
   display: table;
-  height: 60vh;
+  height: 60%;
   color: #CCCCCC;
-  background: rgba(26, 26, 26, 0.2);
 }
 
 .container.headshots {
   background: #222222;
-  height: 40vh;
-  width: 100vw;
+  height: 40%;
+  width: 100%;
 }
 
 .banner-text {
@@ -73,7 +72,7 @@ div#left-column {
 
 .bg-home {
   background: url(/media/bikerack.jpg) no-repeat center center fixed;
-  height: 80vh;
+  height: 80%;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -82,6 +81,7 @@ div#left-column {
 
 .bg-team {
   background: url(/media/tortoise.jpg) no-repeat center center fixed;
+  height: 100%;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
