@@ -38,21 +38,24 @@ div#left-column {
 
 .jumbotron {
   margin-top: 10vh;
-  margin-bottom: 70px;
-  border-top: 8px solid #00ffff;
+  margin-top: 10vh;
   display: table;
   width: 100%;
   height: 60vh;
   color: #ccc;
-  background: rgba(26, 26, 26, 0.6) !important;
+  background: rgba(26, 26, 26, 0.8) !important;
+}
+
+.container.app-banner {
+  width: 60vw;
+  padding:0;
 }
 
 .container.team-banner {
   display: table;
   height: 60vh;
-  width: 100vw;
   color: #CCCCCC;
-  background: rgba(26, 26, 26, 0.6);
+  background: rgba(26, 26, 26, 0.2);
 }
 
 .container.headshots {
