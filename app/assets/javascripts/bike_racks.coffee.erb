@@ -41,16 +41,18 @@ window.addMarkers = ->
   $(".map-marker").each (index, element) =>
     lat = $(element).data("lat")
     lon = $(element).data("lon")
+    count = $(element).data("count")
     url = $(element).data("url")
-    addMarker(lat, lon, url, bounds) if isValidLatLon(lat, lon)
+    addMarker(lat, lon, count, url, bounds) if isValidLatLon(lat, lon)
   map.fitBounds(bounds) unless bounds.isEmpty()
   return
 
-window.addMarker = (latitude, longitude, url) ->
+window.addMarker = (latitude, longitude, count, url) ->
   marker = new google.maps.Marker(
     position:
       lat: latitude
       lng: longitude
+    icon: 'http://google.com/mapfiles/kml/paddle/' + count + '-lv.png'
     map: map)
   marker.addListener('click', -> window.location.href = url)
   bounds.extend marker.position
