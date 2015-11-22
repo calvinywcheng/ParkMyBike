@@ -13,12 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20151117155103) do
 
-  create_table "authentications", force: :cascade do |t|
-    t.integer "user_id"
-    t.string  "provider"
-    t.string  "uid"
-  end
-
   create_table "bike_racks", force: :cascade do |t|
     t.string   "street_number"
     t.string   "street_name"
