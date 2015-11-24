@@ -19,11 +19,17 @@
 
 <% if logged_in? %>
   <script>
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
 
   $('#user_<%= type %>_star').raty({
     score: <%= rating.score %>,
     click: function(score, evt) {
       $.ajax({
+        beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
         url:
         <% if type == 'safety'%>
               '/safety_ratings/'
@@ -39,9 +45,9 @@
               <% else %>
                 "PATCH"
               <% end %>,
-        data: { score: score, bike_rack_id: <%= @bike_rack.id %>}
+        data: { score: score, bike_rack_id: <%= @bike_rack.id %>},
       });
-      location.reload();  //TODO: Force a window reload. This is really hack.
+      location.reload();
     }
   });
   </script>
