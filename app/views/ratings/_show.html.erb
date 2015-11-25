@@ -32,20 +32,20 @@
         beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
         url:
         <% if type == 'safety'%>
-              '/safety_ratings/'
-          <% elsif type == 'cleanliness'%>
-              '/cleanliness_ratings/'
+          '/safety_ratings/'
+        <% elsif type == 'cleanliness'%>
+          '/cleanliness_ratings/'
         <% end %>
 
         <% unless rating.id.blank? %>
-            + <%= rating.id %>
+          + <%= rating.id %>
         <% end %>,
         type: <% if rating.id.blank? %>
-                "POST"
-              <% else %>
-                "PATCH"
-              <% end %>,
-        data: { score: score, bike_rack_id: <%= @bike_rack.id %>},
+          "POST"
+        <% else %>
+          "PATCH"
+        <% end %>,
+        data: { score: score, bike_rack_id: <%= @bike_rack.id %>}
       });
       location.reload();
     }
