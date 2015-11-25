@@ -64,8 +64,9 @@
                                             popup: "true",
                                             url: bike_rack_url(@bike_rack),
                                             image: 'http://i3.getreading.co.uk/incoming/article6191561.ece/ALTERNATES/s1200/Bike-rack-1.jpg',
-                                            desc: "#{@bike_rack.street_number} #{@bike_rack.street_name}. Number of Racks: #{@bike_rack.number_of_racks}. Safety Rating #{@bike_rack.avg_safety}")
-                %>
+                                            desc: "Number of Racks: #{@bike_rack.number_of_racks}. " +
+                                                  "Safety Rating #{@bike_rack.avg_safety}." +
+                                                  "Cleanliness Rating: #{@bike_rack.avg_cleanliness}.")%>
               </td>
             </tr>
           </table>
