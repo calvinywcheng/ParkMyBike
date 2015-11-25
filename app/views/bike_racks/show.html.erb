@@ -2,7 +2,7 @@
   <meta property="og:url"         content="<%= bike_rack_url @bike_rack %>" />
   <meta property="og:title"       content="ParkMyBike: <%= @bike_rack.street_number %> <%= @bike_rack.street_name %>" />
   <meta property="og:description" content="<%= "Number of Racks: #{@bike_rack.number_of_racks}. " +
-                                               "Safety Rating #{@bike_rack.avg_safety}." +
+                                               "Safety Rating #{@bike_rack.avg_safety}. " +
                                                "Cleanliness Rating: #{@bike_rack.avg_cleanliness}." %>" />
   <meta property="og:image"       content="http://i3.getreading.co.uk/incoming/article6191561.ece/ALTERNATES/s1200/Bike-rack-1.jpg" />
 <% end -%>
@@ -63,8 +63,7 @@
               <td>Share on Social Media</td>
               <td>
                 <%= social_share_button_tag("Looking for a place to park your bike?",
-                                            popup: "true",
-                                            url: bike_rack_url(@bike_rack)) %>
+                                            popup: "true")%>
               </td>
             </tr>
           </table>
