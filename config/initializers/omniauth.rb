@@ -1,5 +1,5 @@
 OmniAuth.config.logger = Rails.logger
 
-Rails.application.config.middleware.use OmniAuth::Builder do 
-	provider :facebook, "456395417884604", "bdf3956aef24e652c586f3739e18f8f8"
+Rails.application.config.middleware.use OmniAuth::Builder do
+	provider :facebook, "706274382806077", "0ebecdc770dc8f7e6c04c266ec2afc23", scope: "publish_actions"
 end

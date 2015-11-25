@@ -1,8 +1,18 @@
 <div class="container">
   <div class="page-header">
-    <h1><%=@current_user.username%> Profile</h1>
+    <h1><%= current_user.username %> Profile
+      <% if current_userF %> <%= image_tag current_userF.myImage, :size => "64x64" %>
+      <% end %></h1>
   </div>
-  <p class="lead">Username: <%=@current_user.username%></p>
-  <p class="lead">Email: <%=@current_user.email%></p>
-</div>
+  <p class="lead">Username: <%= current_user.username %></p>
 
+  <p class="lead">Email: <%= current_user.email %></p>
+  <% if current_userF %>
+    <p class="lead">Number of friends: <%= current_userF.friends %></p>
+
+    <p>Signed in as <strong><%= current_userF.name %></strong>!
+      <%= link_to "Sign out", signout_path, id: "sign_out" %></p>
+  <% else %>
+    <%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" %>
+  <% end %>
+</div>

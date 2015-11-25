@@ -1,57 +1,74 @@
+<% content_for :head do -%>
+  <meta property="og:url"         content="<%= bike_rack_url @bike_rack %>" />
+  <meta property="og:title"       content="ParkMyBike: <%= @bike_rack.street_number %> <%= @bike_rack.street_name %>" />
+  <meta property="og:description" content="<%= "Number of Racks: #{@bike_rack.number_of_racks}. " +
+                                               "Safety Rating #{@bike_rack.avg_safety}. " +
+                                               "Cleanliness Rating: #{@bike_rack.avg_cleanliness}." %>" />
+  <meta property="og:image"       content="http://i3.getreading.co.uk/incoming/article6191561.ece/ALTERNATES/s1200/Bike-rack-1.jpg" />
+<% end -%>
+
 <div id="map"></div>
 <div class="col-xs-4" id="bike-table-column">
-    <%= render 'search_box' %>
-    <div class="panel panel-primary map-marker" id="bike-rack-info"
-         data-lat="<%= @bike_rack.latitude %>"
-         data-lon="<%= @bike_rack.longitude %>"
-         data-url="<%= bike_rack_path(@bike_rack) %>">
-        <div class="panel-heading">
-            <h3 class="panel-title">
-                <a href="javascript:history.back()">
-                    <span class="glyphicon glyphicon-chevron-left"></span>
-                </a>
-                Bike Rack Information
-                <span class="pull-right glyphicon glyphicon-chevron-up clickable"></span>
-            </h3>
-        </div>
-        <div class="panel-body">
-            <div id="street-view"
-                 data-lat="<%= @bike_rack.latitude %>"
-                 data-lon="<%= @bike_rack.longitude %>"></div>
-          <div class="panel panel-default" id="bike-detail-panel">
-                <div class="panel-heading">
-                    <h3 class="panel-title" id="bike-rack-detail-title">
-                        <%= @bike_rack.street_number %>
-                        <%= @bike_rack.street_name %>
-                    </h3>
-                </div>
-                <div class="panel-body" id="bike-detail-panel-body">
-                    <table class="table table-responsive table-condensed"
-                           id="bike-rack-detailed-info">
-                        <tr>
-                            <td>Number of Racks</td>
-                            <td><%= @bike_rack.number_of_racks %></td>
-                        </tr>
-                        <tr>
-                            <td>Latitude / Longitude</td>
-                            <td>Latitude: <%= @bike_rack.latitude %><br>
-                                Longitude: <%= @bike_rack.longitude %></td>
-                        </tr>
-                        <tr>
-                            <td>Safety Rating</td>
-                            <td>
-                              <%= render "ratings/show", :rating => @safetyrating, :type => "safety" %>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Cleanliness Rating</td>
-                            <td>
-                              <%= render "ratings/show", :rating => @cleanlinessrating, :type => "cleanliness" %>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        </div>
+  <%= render 'search_box' %>
+  <div class="panel panel-primary map-marker" id="bike-rack-info"
+       data-lat="<%= @bike_rack.latitude %>"
+       data-lon="<%= @bike_rack.longitude %>"
+       data-count="<%= @bike_rack.number_of_racks %>"
+       data-url="<%= bike_rack_path(@bike_rack) %>">
+    <div class="panel-heading">
+      <h3 class="panel-title">
+        <a href="javascript:history.back()">
+          <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        Bike Rack Information
+        <span class="pull-right glyphicon glyphicon-chevron-up clickable"></span>
+      </h3>
     </div>
+    <div class="panel-body">
+      <div id="street-view"
+           data-lat="<%= @bike_rack.latitude %>"
+           data-lon="<%= @bike_rack.longitude %>"></div>
+      <div class="panel panel-default" id="bike-detail-panel">
+        <div class="panel-heading">
+          <h3 class="panel-title" id="bike-rack-detail-title">
+            <%= @bike_rack.street_number %>
+            <%= @bike_rack.street_name %>
+          </h3>
+        </div>
+        <div class="panel-body" id="bike-detail-panel-body">
+          <table class="table table-responsive table-condensed"
+                 id="bike-rack-detailed-info">
+            <tr>
+              <td>Number of Racks</td>
+              <td><%= @bike_rack.number_of_racks %></td>
+            </tr>
+            <tr>
+              <td>Latitude / Longitude</td>
+              <td>Latitude: <%= @bike_rack.latitude %><br>
+                Longitude: <%= @bike_rack.longitude %></td>
+            </tr>
+            <tr>
+              <td>Safety Rating</td>
+              <td>
+                <%= render "ratings/show", :rating => @safetyrating, :type => "safety" %>
+              </td>
+            </tr>
+            <tr>
+              <td>Cleanliness Rating</td>
+              <td>
+                <%= render "ratings/show", :rating => @cleanlinessrating, :type => "cleanliness" %>
+              </td>
+            </tr>
+            <tr>
+              <td>Share on Social Media</td>
+              <td>
+                <%= social_share_button_tag("Looking for a place to park your bike?",
+                                            popup: "true")%>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

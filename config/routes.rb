@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'homes/show'
+
   patch 'bike_racks' => 'bike_racks#update_all'
 
   resources :bike_racks, only: [:index, :show]
@@ -28,6 +30,11 @@ Rails.application.routes.draw do
 
   resources :safety_ratings, only: [:update, :create]
   resources :cleanliness_ratings, only: [:update, :create]
+
+
+
+match 'auth/:provider/callback', to: 'sessions#create', :via=> [:get]
+match 'signout', :to => 'sessions#destroy', :via=> [:get], as: 'signout'
 
 end
 
