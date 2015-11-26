@@ -8,10 +8,11 @@
 
   <p class="lead">Email: <%= current_user.email %></p>
   <% if current_userF %>
-    <p class="lead">Number of friends: <%= current_userF.friends %></p>
+    <p class="lead">Number of friends who are using this app: <%= current_userF.friends %></p>
 
     <p>Signed in as <strong><%= current_userF.name %></strong>!
       <%= link_to "Sign out", signout_path, id: "sign_out" %></p>
+
   <% else %>
     <%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" %>
   <% end %>
