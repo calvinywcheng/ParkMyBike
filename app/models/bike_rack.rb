@@ -8,7 +8,7 @@ class BikeRack < ActiveRecord::Base
 
   def self.search(search)
     if search
-      where('street_name LIKE ?', "%#{search}%")
+      where('LOWER(street_name) LIKE ?', "%#{search}%")
     else
       none
     end
