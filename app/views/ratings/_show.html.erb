@@ -45,9 +45,9 @@
         <% else %>
           "PATCH"
         <% end %>,
-        data: { score: score, bike_rack_id: <%= @bike_rack.id %>}
+        data: { score: score, bike_rack_id: <%= @bike_rack.id %>},
+        complete : function(jqXHR, textStatus) {location.reload();}
       });
-      location.reload();
     }
   });
   </script>
